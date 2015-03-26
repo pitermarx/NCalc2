@@ -25,11 +25,11 @@ after_test:
 artifacts:
   - path: Evaluant.Calculator\bin\Release\NCalc2.dll
     name: NCalc2.dll
-  - path: '**\*.nupkg'
+  - path: '**\NCalc2*.nupkg'
 
 #uncomment to publish to NuGet
-#deploy:
-#  provider: NuGet
-#  api_key:
-#    secure: fyP5dkdCm19QVS2TDNqMbZDYxx6vou0+B5EMJfrGckMhKpDqqt2yMq/Ca6mwAKTv
-#  artifact: /.*\.nupkg/
+deploy:
+  provider: NuGet
+  api_key:
+    secure: fyP5dkdCm19QVS2TDNqMbZDYxx6vou0+B5EMJfrGckMhKpDqqt2yMq/Ca6mwAKTv
+  artifact: /.*\NCalc2*.nupkg/
