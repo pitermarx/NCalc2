@@ -9,9 +9,6 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>NCalc is a mathematical expressions evaluator in .NET. NCalc can parse any expression and evaluate the result, including static or dynamic parameters and custom functions.</description>
     <tags>mathematical expression parse evaluate</tags>
-    <dependencies>
-        <dependency id="Antlr4.Runtime" version="4.3.0" />
-    </dependencies>
   </metadata>
   <files>
     <file src="..\Evaluant.Calculator\bin\Release\NCalc.dll" target="lib\net35\" />
