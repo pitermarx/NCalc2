@@ -5,9 +5,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using Antlr4.Runtime;
-using NCalc.Domain;
+using NCalc2.Domain;
 
-namespace NCalc
+namespace NCalc2
 {
     public class Expression
     {
@@ -131,8 +131,8 @@ namespace NCalc
 
             if (logicalExpression == null)
             {
-                var lexer = new NCalcLexer(new AntlrInputStream(expression));
-                var parser = new NCalcParser(new CommonTokenStream(lexer));
+                var lexer = new NCalc2Lexer(new AntlrInputStream(expression));
+                var parser = new NCalc2Parser(new CommonTokenStream(lexer));
                 var errorListener = new ErrorListener();
                 parser.AddErrorListener(errorListener);
 

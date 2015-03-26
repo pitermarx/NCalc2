@@ -2,10 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
-using NCalc.Domain;
+using NCalc2.Domain;
 using NUnit.Framework;
 
-namespace NCalc.Tests
+namespace NCalc2.Tests
 {
     [TestFixture]
     public class Fixtures

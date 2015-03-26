@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NCalc
+namespace NCalc2
 {
     // Summary:
     //     Provides enumerated values to use to set evaluation options.

@@ -1,4 +1,4 @@
-# NCalc2015
+# NCalc2
 An attempt to bring NCalc to github
 
 http://ncalc.codeplex.com/

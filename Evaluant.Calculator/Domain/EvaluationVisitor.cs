@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace NCalc.Domain
+namespace NCalc2.Domain
 {
     public class EvaluationVisitor : LogicalExpressionVisitor
     {

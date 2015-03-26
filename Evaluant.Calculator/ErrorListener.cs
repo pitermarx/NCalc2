@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Antlr4.Runtime;
 
-namespace NCalc
+namespace NCalc2
 {
     public class ErrorListener : IAntlrErrorListener<IToken>
     {

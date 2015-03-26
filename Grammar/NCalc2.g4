@@ -1,4 +1,4 @@
-grammar NCalc;
+grammar NCalc2;
 
 options
 {
@@ -12,7 +12,7 @@ using System;
 using System.Text;
 using System.Globalization;
 using System.Collections.Generic;
-using NCalc.Domain;
+using NCalc2.Domain;
 }
 
 @members {

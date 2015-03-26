@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NCalc
+namespace NCalc2
 {
     public class ParameterArgs : EventArgs
     {
