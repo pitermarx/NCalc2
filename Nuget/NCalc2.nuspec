@@ -13,4 +13,7 @@
   <files>
     <file src="..\Evaluant.Calculator\bin\Release\NCalc.dll" target="lib\net35\" />
   </files>
+  <dependencies>
+      <dependency id="Antlr4.Runtime" version="4.3.0" />
+  </dependencies>
 </package>
