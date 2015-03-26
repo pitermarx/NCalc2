@@ -28,8 +28,8 @@ artifacts:
   - path: '**\*.nupkg'
 
 #uncomment to publish to NuGet
-deploy:
-  provider: NuGet
-  api_key:
-    secure: fyP5dkdCm19QVS2TDNqMbZDYxx6vou0+B5EMJfrGckMhKpDqqt2yMq/Ca6mwAKTv
-  artifact: /.*\.nupkg/
+#deploy:
+#  provider: NuGet
+#  api_key:
+#    secure: fyP5dkdCm19QVS2TDNqMbZDYxx6vou0+B5EMJfrGckMhKpDqqt2yMq/Ca6mwAKTv
+#  artifact: /.*\.nupkg/
