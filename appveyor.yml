@@ -23,7 +23,7 @@ after_test:
   - ps: .\nuget\pack.ps1
 
 artifacts:
-  - path: Evaluant.Calculator\bin\Release\MarkdownLog.dll
+  - path: Evaluant.Calculator\bin\Release\NCalc2.dll
     name: NCalc2.dll
   - path: '**\*.nupkg'
 
