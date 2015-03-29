@@ -135,8 +135,7 @@ namespace NCalc2
                 var parser = new NCalc2Parser(new CommonTokenStream(lexer));
                 var errorListener = new ErrorListener();
                 parser.AddErrorListener(errorListener);
-
-                logicalExpression = parser.ncalcExpression().retval;
+                logicalExpression = parser.ncalc().Accept(new NCalc2Visitor());
 
                 if (errorListener.Errors.Any())
                 {

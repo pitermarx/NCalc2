@@ -70,6 +70,7 @@
     <Compile Include="ErrorListener.cs" />
     <Compile Include="EvaluationException.cs" />
     <Compile Include="EvaluationOption.cs" />
+    <Compile Include="NCalc2Visitor.cs" />
     <Compile Include="Numbers.cs" />
     <Compile Include="ParameterArgs.cs" />
     <Compile Include="Domain\Parameter.cs" />
