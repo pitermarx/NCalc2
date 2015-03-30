@@ -1,6 +1,7 @@
 using System;
+using NCalc2.Visitors;
 
-namespace NCalc2.Domain
+namespace NCalc2.Expressions
 {
     public class ValueExpression : LogicalExpression
     {

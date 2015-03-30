@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Globalization;
 using System.Text;
+using NCalc2.Expressions;
+using ValueType = NCalc2.Expressions.ValueType;
 
-namespace NCalc2.Domain
+namespace NCalc2.Visitors
 {
     public class SerializationVisitor : LogicalExpressionVisitor
     {
@@ -162,7 +164,7 @@ namespace NCalc2.Domain
             }
         }
 
-        public override void Visit(Function function)
+        public override void Visit(FunctionExpression function)
         {
             Result.Append(function.Identifier.Name);
 
@@ -185,7 +187,7 @@ namespace NCalc2.Domain
             Result.Append(") ");
         }
 
-        public override void Visit(Identifier parameter)
+        public override void Visit(IdentifierExpression parameter)
         {
             Result.Append("[").Append(parameter.Name).Append("] ");
         }

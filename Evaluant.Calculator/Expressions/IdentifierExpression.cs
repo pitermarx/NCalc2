@@ -1,8 +1,10 @@
-namespace NCalc2.Domain
+using NCalc2.Visitors;
+
+namespace NCalc2.Expressions
 {
-    public class Identifier : LogicalExpression
+    public class IdentifierExpression : LogicalExpression
     {
-        public Identifier(string name)
+        public IdentifierExpression(string name)
         {
             Name = name;
         }

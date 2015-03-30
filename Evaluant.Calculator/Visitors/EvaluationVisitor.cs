@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using NCalc2.Expressions;
 
-namespace NCalc2.Domain
+namespace NCalc2.Visitors
 {
     public class EvaluationVisitor : LogicalExpressionVisitor
     {
@@ -38,15 +40,7 @@ namespace NCalc2.Domain
         /// <returns></returns>
         private static Type GetMostPreciseType(Type a, Type b)
         {
-            foreach (Type t in CommonTypes)
-            {
-                if (a == t || b == t)
-                {
-                    return t;
-                }
-            }
-
-            return a;
+            return CommonTypes.FirstOrDefault(t => a == t || b == t) ?? a;
         }
 
         public int CompareUsingMostPreciseType(object a, object b)
@@ -222,7 +216,7 @@ namespace NCalc2.Domain
             Result = expression.Value;
         }
 
-        public override void Visit(Function function)
+        public override void Visit(FunctionExpression function)
         {
             var args = new FunctionArgs
                            {
@@ -639,7 +633,7 @@ namespace NCalc2.Domain
                 EvaluateFunction(name, args);
         }
 
-        public override void Visit(Identifier parameter)
+        public override void Visit(IdentifierExpression parameter)
         {
             if (Parameters.ContainsKey(parameter.Name))
             {

@@ -1,4 +1,6 @@
-namespace NCalc2.Domain
+using NCalc2.Visitors;
+
+namespace NCalc2.Expressions
 {
     public class UnaryExpression : LogicalExpression
     {

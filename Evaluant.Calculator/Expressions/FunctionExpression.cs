@@ -1,14 +1,16 @@
-namespace NCalc2.Domain
+using NCalc2.Visitors;
+
+namespace NCalc2.Expressions
 {
-    public class Function : LogicalExpression
+    public class FunctionExpression : LogicalExpression
     {
-        public Function(Identifier identifier, LogicalExpression[] expressions)
+        public FunctionExpression(IdentifierExpression identifier, LogicalExpression[] expressions)
         {
             Identifier = identifier;
             Expressions = expressions;
         }
 
-        public Identifier Identifier { get; set; }
+        public IdentifierExpression Identifier { get; set; }
 
         public LogicalExpression[] Expressions { get; set; }
 

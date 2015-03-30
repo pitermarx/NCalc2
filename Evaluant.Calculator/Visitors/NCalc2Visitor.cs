@@ -4,9 +4,9 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using Antlr4.Runtime;
-using NCalc2.Domain;
+using NCalc2.Expressions;
 
-namespace NCalc2
+namespace NCalc2.Visitors
 {
     public class NCalc2Visitor : NCalc2BaseVisitor<LogicalExpression>
     {
@@ -251,7 +251,7 @@ namespace NCalc2
         {
             var id = Visit(context.id());
             var args = context.expr().Select(Visit).ToArray();
-            return new Function((Identifier) id, args);
+            return new FunctionExpression((IdentifierExpression) id, args);
         }
 
         public override LogicalExpression VisitToIdentifier(NCalc2Parser.ToIdentifierContext context)
@@ -301,12 +301,12 @@ namespace NCalc2
         public override LogicalExpression VisitVariable(NCalc2Parser.VariableContext context)
         {
             var name = context.VAR().GetText();
-            return new Identifier(name.Substring(1, name.Length - 2));
+            return new IdentifierExpression(name.Substring(1, name.Length - 2));
         }
 
         public override LogicalExpression VisitName(NCalc2Parser.NameContext context)
         {
-            return new Identifier(context.NAME().GetText());
+            return new IdentifierExpression(context.NAME().GetText());
         }
     }
 }

@@ -1,4 +1,6 @@
-namespace NCalc2.Domain
+using NCalc2.Expressions;
+
+namespace NCalc2.Visitors
 {
     public abstract class LogicalExpressionVisitor
     {
@@ -12,8 +14,8 @@ namespace NCalc2.Domain
 
         public abstract void Visit(ValueExpression expression);
 
-        public abstract void Visit(Function function);
+        public abstract void Visit(FunctionExpression function);
 
-        public abstract void Visit(Identifier function);
+        public abstract void Visit(IdentifierExpression function);
     }
 }

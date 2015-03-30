@@ -5,7 +5,8 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using Antlr4.Runtime;
-using NCalc2.Domain;
+using NCalc2.Expressions;
+using NCalc2.Visitors;
 
 namespace NCalc2
 {

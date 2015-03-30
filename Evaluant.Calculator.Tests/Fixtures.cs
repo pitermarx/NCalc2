@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
-using NCalc2.Domain;
+using NCalc2.Expressions;
 using NUnit.Framework;
 
 namespace NCalc2.Tests
@@ -305,7 +305,7 @@ namespace NCalc2.Tests
             Assert.AreEqual("-(True and False)", new UnaryExpression(UnaryExpressionType.Negate, new BinaryExpression(BinaryExpressionType.And, new ValueExpression(true), new ValueExpression(false))).ToString());
             Assert.AreEqual("!(True and False)", new UnaryExpression(UnaryExpressionType.Not, new BinaryExpression(BinaryExpressionType.And, new ValueExpression(true), new ValueExpression(false))).ToString());
 
-            Assert.AreEqual("test(True and False, -(True and False))", new Function(new Identifier("test"), new LogicalExpression[] { new BinaryExpression(BinaryExpressionType.And, new ValueExpression(true), new ValueExpression(false)), new UnaryExpression(UnaryExpressionType.Negate, new BinaryExpression(BinaryExpressionType.And, new ValueExpression(true), new ValueExpression(false))) }).ToString());
+            Assert.AreEqual("test(True and False, -(True and False))", new FunctionExpression(new IdentifierExpression("test"), new LogicalExpression[] { new BinaryExpression(BinaryExpressionType.And, new ValueExpression(true), new ValueExpression(false)), new UnaryExpression(UnaryExpressionType.Negate, new BinaryExpression(BinaryExpressionType.And, new ValueExpression(true), new ValueExpression(false))) }).ToString());
 
             Assert.AreEqual("True", new ValueExpression(true).ToString());
             Assert.AreEqual("False", new ValueExpression(false).ToString());
@@ -314,8 +314,8 @@ namespace NCalc2.Tests
             Assert.AreEqual("'hello'", new ValueExpression("hello").ToString());
             Assert.AreEqual("#" + new DateTime(2009, 1, 1) + "#", new ValueExpression(new DateTime(2009, 1, 1)).ToString());
 
-            Assert.AreEqual("Sum(1 + 2)", new Function(
-                new Identifier("Sum"),
+            Assert.AreEqual("Sum(1 + 2)", new FunctionExpression(
+                new IdentifierExpression("Sum"),
                 new[] { new BinaryExpression(BinaryExpressionType.Plus, new ValueExpression(1), new ValueExpression(2)) }).ToString());
         }
 
