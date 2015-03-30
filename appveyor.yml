@@ -6,7 +6,7 @@ branches:
 
 environment:
   COVERALLS_REPO_TOKEN:
-    secure: 7L14Y7gs3UFTBsUqU7luZOq3eBOfYAbZd
+    secure: Fn2Rg+MvIJ+uhgKmN+KLa2RH6cnNAfaY7yOZZKzX0RMn+bgzPdL6d0Pg1DigMFZC
 
 assembly_info:
   patch: true
