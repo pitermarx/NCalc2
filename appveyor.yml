@@ -23,7 +23,7 @@ before_build:
 build:
   project: NCalc2.sln
 test_script:
-  - ps: >-
+  - ps:
     .\packages\OpenCover.4.5.3522\OpenCover.Console.exe -register:user -target:nunit-console.exe -register:user "-targetargs:""Evaluant.Calculator.Tests\bin\$env:CONFIGURATION\NCalc.Tests"" /noshadow" -filter:"+[NCalc2*]*" -output:opencoverCoverage.xml
     .\packages\coveralls.net.0.5.0\csmacnz.Coveralls.exe --opencover -i opencoverCoverage.xml --repoToken $env:COVERALLS_REPO_TOKEN --commitId $env:APPVEYOR_REPO_COMMIT --commitBranch $env:APPVEYOR_REPO_BRANCH --commitAuthor $env:APPVEYOR_REPO_COMMIT_AUTHOR --commitEmail $env:APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL --commitMessage $env:APPVEYOR_REPO_COMMIT_MESSAGE --jobId $env:APPVEYOR_JOB_ID
 after_test:
