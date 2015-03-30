@@ -8,7 +8,7 @@ ncalc
 
 expr
     : orExpr '?' orExpr ':' orExpr      #ternaryExpression
-    |   orExpr                          #toOrExpression
+    | orExpr                            #toOrExpression
     ;
 
 orExpr
@@ -84,17 +84,17 @@ primaryExpr
     ;
 
 value
-    :   INTEGER     #Integer
-    |   FLOAT       #Float
-    |   STRING      #String
-    |   DATETIME    #DateTime
-    |   TRUE        #True
-    |   FALSE       #False
+    : INTEGER     #Integer
+    | FLOAT       #Float
+    | STRING      #String
+    | DATETIME    #DateTime
+    | TRUE        #True
+    | FALSE       #False
     ;
 
 id
-    :   NAME        #Name
-    |   VAR         #Variable
+    : NAME        #Name
+    | VAR         #Variable
     ;
 
 TRUE    : 'true'  ;
