@@ -2,99 +2,155 @@ grammar NCalc2;
 
 options{language=CSharp3;}
 
-ncalc
-    : expr EOF
+@header {
+using System;
+using System.Text;
+using System.Globalization;
+using System.Collections.Generic;
+using NCalc2.Expressions;
+}
+
+@members {
+private const char BS = '\\';
+private static NumberFormatInfo numberFormatInfo = new NumberFormatInfo();
+
+private string extractString(string text) {
+    
+    StringBuilder sb = new StringBuilder(text);
+    int startIndex = 1; // Skip initial quote
+    int slashIndex = -1;
+
+    while ((slashIndex = sb.ToString().IndexOf(BS, startIndex)) != -1)
+    {
+        char escapeType = sb[slashIndex + 1];
+        switch (escapeType)
+        {
+            case 'u':
+              string hcode = String.Concat(sb[slashIndex+4], sb[slashIndex+5]);
+              string lcode = String.Concat(sb[slashIndex+2], sb[slashIndex+3]);
+              char unicodeChar = Encoding.Unicode.GetChars(new byte[] { System.Convert.ToByte(hcode, 16), System.Convert.ToByte(lcode, 16)} )[0];
+              sb.Remove(slashIndex, 6).Insert(slashIndex, unicodeChar); 
+              break;
+            case 'n': sb.Remove(slashIndex, 2).Insert(slashIndex, '\n'); break;
+            case 'r': sb.Remove(slashIndex, 2).Insert(slashIndex, '\r'); break;
+            case 't': sb.Remove(slashIndex, 2).Insert(slashIndex, '\t'); break;
+            case '\'': sb.Remove(slashIndex, 2).Insert(slashIndex, '\''); break;
+            case '\\': sb.Remove(slashIndex, 2).Insert(slashIndex, '\\'); break;
+            default: throw new Exception("Unvalid escape sequence: \\" + escapeType);
+        }
+
+        startIndex = slashIndex + 1;
+
+    }
+
+    sb.Remove(0, 1);
+    sb.Remove(sb.Length - 1, 1);
+
+    return sb.ToString();
+}
+}
+
+@init {
+    numberFormatInfo.NumberDecimalSeparator = ".";
+}
+ncalc returns[LogicalExpression retValue] 
+    : expr EOF { $retValue = $expr.retValue;}
     ;
 
-expr
-    : orExpr '?' orExpr ':' orExpr      #ternaryExpression
-    | orExpr                            #toOrExpression
+expr returns[LogicalExpression retValue]
+    : first=orExpr '?' middle=expr ':' right=expr   { $retValue = new TernaryExpression($first.retValue, $middle.retValue, $right.retValue);}
+    | orExpr                                        { $retValue = $orExpr.retValue;}
     ;
 
-orExpr
-    : orExpr ('||'|'or') andExpr        #orExpression
-    | andExpr                           #toAndExpression
+orExpr returns[LogicalExpression retValue] 
+    : first=orExpr ('||'|'or') andExpr      { $retValue = new BinaryExpression(BinaryExpressionType.Or, $first.retValue, $andExpr.retValue);}
+    | andExpr                               { $retValue = $andExpr.retValue;}
     ;
 
-andExpr
-    : andExpr ('&&'|'and') bitOrExpr    #andExpression
-    | bitOrExpr                         #toBitOrExpression
+andExpr returns[LogicalExpression retValue] 
+    : first=andExpr ('&&'|'and') bitOrExpr  { $retValue = new BinaryExpression(BinaryExpressionType.And, $first.retValue, $bitOrExpr.retValue);}
+    | bitOrExpr                             { $retValue = $bitOrExpr.retValue;}
     ;
 
-bitOrExpr
-    : bitOrExpr '|' bitXorExpr          #bitOrExpression
-    | bitXorExpr                        #toBitXorExpression
+bitOrExpr returns[LogicalExpression retValue] 
+    : first=bitOrExpr '|' bitXorExpr    { $retValue = new BinaryExpression(BinaryExpressionType.BitwiseOr, $first.retValue, $bitXorExpr.retValue);}
+    | bitXorExpr                        { $retValue = $bitXorExpr.retValue;}
     ;
 
-bitXorExpr
-    : bitXorExpr '^' bitAndExpr         #bitXorExpression
-    | bitAndExpr                        #toBitAndExpression
+bitXorExpr returns[LogicalExpression retValue] 
+    : first=bitXorExpr '^' bitAndExpr   { $retValue = new BinaryExpression(BinaryExpressionType.BitwiseXOr, $first.retValue, $bitAndExpr.retValue);}
+    | bitAndExpr                        { $retValue = $bitAndExpr.retValue;}
     ;
 
-bitAndExpr
-    : bitAndExpr '&' eqExpr             #bitAndExpression
-    | eqExpr                            #toEqualExpression
+bitAndExpr returns[LogicalExpression retValue] 
+    : first=bitAndExpr '&' eqExpr       { $retValue = new BinaryExpression(BinaryExpressionType.BitwiseAnd, $first.retValue, $eqExpr.retValue);}
+    | eqExpr                            { $retValue = $eqExpr.retValue;}
     ;
 
-eqExpr
-    : eqExpr ('=='|'=')	 relExpr        #equalExpression
-    | eqExpr ('!='|'<>') relExpr        #notEqualExpression
-    | relExpr                           #toRelationalExpression
+eqExpr returns[LogicalExpression retValue] 
+    : first=eqExpr ('=='|'=')  relExpr  { $retValue = new BinaryExpression(BinaryExpressionType.Equal, $first.retValue, $relExpr.retValue);}
+    | first=eqExpr ('!='|'<>') relExpr  { $retValue = new BinaryExpression(BinaryExpressionType.NotEqual, $first.retValue, $relExpr.retValue);}
+    | relExpr                           { $retValue = $relExpr.retValue;}
     ;
 
-relExpr
-    : relExpr '<'  shiftExpr            #lessExpression
-    | relExpr '<=' shiftExpr            #lessOrEqualExpression
-    | relExpr '>'  shiftExpr            #greaterExpression
-    | relExpr '>=' shiftExpr            #greaterOrEqualExpression
-    | shiftExpr                         #toShiftExpression
+relExpr returns[LogicalExpression retValue] 
+    : first=relExpr '<'  shiftExpr      { $retValue = new BinaryExpression(BinaryExpressionType.Lesser, $first.retValue, $shiftExpr.retValue);}
+    | first=relExpr '<=' shiftExpr      { $retValue = new BinaryExpression(BinaryExpressionType.LesserOrEqual, $first.retValue, $shiftExpr.retValue);}
+    | first=relExpr '>'  shiftExpr      { $retValue = new BinaryExpression(BinaryExpressionType.Greater, $first.retValue, $shiftExpr.retValue);}
+    | first=relExpr '>=' shiftExpr      { $retValue = new BinaryExpression(BinaryExpressionType.GreaterOrEqual, $first.retValue, $shiftExpr.retValue);}
+    | shiftExpr                         { $retValue = $shiftExpr.retValue;}
     ;
 
-shiftExpr
-    : shiftExpr '<<' addExpr            #shiftLeftExpression
-    | shiftExpr '>>' addExpr            #shiftRightExpression
-    | addExpr                           #toAddExpression
+shiftExpr returns[LogicalExpression retValue] 
+    : first=shiftExpr '<<' addExpr      { $retValue = new BinaryExpression(BinaryExpressionType.LeftShift, $first.retValue, $addExpr.retValue);}
+    | first=shiftExpr '>>' addExpr      { $retValue = new BinaryExpression(BinaryExpressionType.RightShift, $first.retValue, $addExpr.retValue);}
+    | addExpr                           { $retValue = $addExpr.retValue;}
     ;
 
-addExpr
-    : addExpr '+' multExpr              #addExpression
-    | addExpr '-' multExpr              #subtractExpression
-    | multExpr                          #toMultExpression
+addExpr returns[LogicalExpression retValue] 
+    : first=addExpr '+' multExpr        { $retValue = new BinaryExpression(BinaryExpressionType.Plus, $first.retValue, $multExpr.retValue);}
+    | first=addExpr '-' multExpr        { $retValue = new BinaryExpression(BinaryExpressionType.Minus, $first.retValue, $multExpr.retValue);}
+    | multExpr                          { $retValue = $multExpr.retValue;}
+    ;                                   
+
+multExpr returns[LogicalExpression retValue] 
+    : first=multExpr '*' unaryExpr      { $retValue = new BinaryExpression(BinaryExpressionType.Times, $first.retValue, $unaryExpr.retValue);}
+    | first=multExpr '/' unaryExpr      { $retValue = new BinaryExpression(BinaryExpressionType.Div, $first.retValue, $unaryExpr.retValue);}
+    | first=multExpr '%' unaryExpr      { $retValue = new BinaryExpression(BinaryExpressionType.Modulo, $first.retValue, $unaryExpr.retValue);}
+    | unaryExpr                         { $retValue = $unaryExpr.retValue;}
+    ;
+    
+unaryExpr returns[LogicalExpression retValue] 
+    : ('!' | 'not') primaryExpr         { $retValue = new UnaryExpression(UnaryExpressionType.Not, $primaryExpr.retValue);}
+    | '~' primaryExpr                   { $retValue = new UnaryExpression(UnaryExpressionType.BitwiseNot, $primaryExpr.retValue);}
+    | '-' primaryExpr                   { $retValue = new UnaryExpression(UnaryExpressionType.Negate, $primaryExpr.retValue);}
+    | primaryExpr                       { $retValue = $primaryExpr.retValue;}
     ;
 
-multExpr
-    : multExpr '*' unaryExpr            #multiplyExpression
-    | multExpr '/' unaryExpr            #divideExpression
-    | multExpr '%' unaryExpr            #moduloExpression
-    | unaryExpr                         #toUnaryExpression
+primaryExpr returns[LogicalExpression retValue] 
+    @init { var args = new List<LogicalExpression>(); }
+    : '(' expr ')'                      { $retValue = $expr.retValue;}
+    | value                             { $retValue = $value.retValue;}
+    | id 
+        '(' expr                        { args.Add($expr.retValue);} 
+            (',' expr                   { args.Add($expr.retValue);}
+            )*
+        ')'                             { $retValue = new FunctionExpression((IdentifierExpression)$id.retValue, args.ToArray());}
+    | id                                { $retValue = $id.retValue;}
     ;
 
-unaryExpr
-    : ('!' | 'not') primaryExpr         #notExpression
-    | '~' primaryExpr                   #bitNotExpression
-    | '-' primaryExpr                   #negateExpression
-    | primaryExpr                       #toPrimaryExpression
+value returns[LogicalExpression retValue]
+    : INTEGER     { try{ $retValue = new ValueExpression(int.Parse($INTEGER.text));} catch { $retValue = new ValueExpression(long.Parse($INTEGER.text)); } }
+    | FLOAT       { $retValue = new ValueExpression(double.Parse($FLOAT.text, NumberStyles.Float, numberFormatInfo));}
+    | STRING      { $retValue = new ValueExpression(extractString($STRING.text));}
+    | DATETIME    { $retValue = new ValueExpression(DateTime.Parse($DATETIME.text.Substring(1, $DATETIME.text.Length - 2)));}
+    | TRUE        { $retValue = new ValueExpression(true);}
+    | FALSE       { $retValue = new ValueExpression(false);}
     ;
 
-primaryExpr
-    : '(' expr ')'                      #toLogicalExpression
-    | value                             #toValue
-    | id '(' expr (',' expr)* ')'       #function
-    | id                                #toIdentifier
-    ;
-
-value
-    : INTEGER     #Integer
-    | FLOAT       #Float
-    | STRING      #String
-    | DATETIME    #DateTime
-    | TRUE        #True
-    | FALSE       #False
-    ;
-
-id
-    : NAME        #Name
-    | VAR         #Variable
+id returns[LogicalExpression retValue]
+    : NAME { $retValue = new IdentifierExpression($NAME.text); }
+    | VAR  { $retValue = new IdentifierExpression($VAR.text.Substring(1, $VAR.text.Length - 2)); }
     ;
 
 TRUE    : 'true'  ;
