@@ -11,6 +11,19 @@ namespace NCalc2.Tests
     public class Fixtures
     {
         [Test]
+        public void MultipleTernary()
+        {
+            Assert.AreEqual(new Expression("true ? false ? 2 : 3 : 1").Evaluate(), 3);
+            Assert.AreEqual(new Expression("true ? true ? 2 : 3 : 1").Evaluate(), 2);
+            Assert.AreEqual(new Expression("false ? false ? 2 : 3 : 1").Evaluate(), 1);
+            Assert.AreEqual(new Expression("false ? true ? 2 : 3 : 1").Evaluate(), 1);
+
+            Assert.AreEqual(new Expression("true ? 1 : false ? 2 : 3").Evaluate(), 1);
+            Assert.AreEqual(new Expression("false ? 1 : false ? 2 : 3").Evaluate(), 3);
+            Assert.AreEqual(new Expression("false ? 1 : true ? 2 : 1").Evaluate(), 2);
+        }
+
+        [Test]
         public void ExpressionShouldEvaluate()
         {
             var expressions = new[]
@@ -324,7 +337,7 @@ namespace NCalc2.Tests
         {
             Assert.AreEqual("toto", new Expression("'to' + 'to'").Evaluate());
             Assert.AreEqual("one2", new Expression("'one' + 2").Evaluate());
-            Assert.AreEqual(3M, new Expression("1 + '2'").Evaluate());
+            Assert.AreEqual("12", new Expression("1 + '2'").Evaluate());
         }
 
         [Test]
