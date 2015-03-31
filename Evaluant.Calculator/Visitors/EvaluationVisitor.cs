@@ -8,13 +8,13 @@ namespace NCalc2.Visitors
 {
     public class EvaluationVisitor : LogicalExpressionVisitor
     {
-        private readonly EvaluateOptions options = EvaluateOptions.None;
+        private readonly EvaluateOptions _options = EvaluateOptions.None;
 
-        private bool IgnoreCase { get { return (options & EvaluateOptions.IgnoreCase) == EvaluateOptions.IgnoreCase; } }
+        private bool IgnoreCase { get { return (_options & EvaluateOptions.IgnoreCase) == EvaluateOptions.IgnoreCase; } }
 
         public EvaluationVisitor(EvaluateOptions options)
         {
-            this.options = options;
+            _options = options;
         }
 
         public object Result { get; private set; }
@@ -30,8 +30,6 @@ namespace NCalc2.Visitors
             throw new Exception("The method or operation is not implemented.");
         }
 
-        private static readonly Type[] CommonTypes = { typeof(Int64), typeof(Double), typeof(Boolean), typeof(String), typeof(Decimal) };
-
         /// <summary>
         /// Gets the the most precise type.
         /// </summary>
@@ -40,7 +38,15 @@ namespace NCalc2.Visitors
         /// <returns></returns>
         private static Type GetMostPreciseType(Type a, Type b)
         {
-            return CommonTypes.FirstOrDefault(t => a == t || b == t) ?? a;
+            foreach (Type t in new[] { typeof(String), typeof(Decimal), typeof(Double), typeof(Int32), typeof(Boolean) })
+            {
+                if (a == t || b == t)
+                {
+                    return t;
+                }
+            }
+
+            return a;
         }
 
         public int CompareUsingMostPreciseType(object a, object b)
@@ -65,128 +71,127 @@ namespace NCalc2.Visitors
             }
         }
 
-        private static bool IsReal(object value)
-        {
-            var typeCode = Type.GetTypeCode(value.GetType());
-
-            return typeCode == TypeCode.Decimal || typeCode == TypeCode.Double || typeCode == TypeCode.Single;
-        }
-
         public override void Visit(BinaryExpression expression)
         {
-            // simulate Lazy<Func<>> behavior for late evaluation
-            object leftValue = null;
-            Func<object> left = () =>
-                                 {
-                                     if (leftValue == null)
-                                     {
-                                         expression.LeftExpression.Accept(this);
-                                         leftValue = Result;
-                                     }
-                                     return leftValue;
-                                 };
+            // Evaluates the left expression and saves the value
+            expression.LeftExpression.Accept(this);
+            dynamic left = Result;
 
-            // simulate Lazy<Func<>> behavior for late evaluation
-            object rightValue = null;
-            Func<object> right = () =>
+            if (expression.Type == BinaryExpressionType.And && !left)
             {
-                if (rightValue == null)
+                Result = false;
+                return;
+            }
+
+            if (expression.Type == BinaryExpressionType.Or && left)
+            {
+                Result = true;
+                return;
+            }
+
+            // Evaluates the right expression and saves the value
+            expression.RightExpression.Accept(this);
+            dynamic right = Result;
+            try
+            {
+                switch (expression.Type)
                 {
-                    expression.RightExpression.Accept(this);
-                    rightValue = Result;
+                    case BinaryExpressionType.And:
+                        Result = left && right;
+                        break;
+
+                    case BinaryExpressionType.Or:
+                        Result = left || right;
+                        break;
+
+                    case BinaryExpressionType.Div:
+                        // force integer divisions to double result, otherwise use standard operators
+                        if (left is int && right is int)
+                        {
+                            Result = Convert.ToDouble(left) / right;
+                        }
+                        else
+                        {
+                            Result = left / right;
+                        }
+
+                        break;
+
+                    case BinaryExpressionType.Equal:
+                        Result = left == right;
+                        break;
+
+                    case BinaryExpressionType.Greater:
+                        Result = left > right;
+                        break;
+
+                    case BinaryExpressionType.GreaterOrEqual:
+                        Result = left >= right;
+                        break;
+
+                    case BinaryExpressionType.Lesser:
+                        Result = left < right;
+                        break;
+
+                    case BinaryExpressionType.LesserOrEqual:
+                        Result = left <= right;
+                        break;
+
+                    case BinaryExpressionType.Minus:
+                        Result = left - right;
+                        break;
+
+                    case BinaryExpressionType.Modulo:
+                        Result = left % right;
+                        break;
+
+                    case BinaryExpressionType.NotEqual:
+                        Result = left != right;
+                        break;
+
+                    case BinaryExpressionType.Plus:
+                        if ((left is double && right is decimal) ||
+                            (left is decimal && right is double))
+                        {
+                            Result = Convert.ToDouble(left) + Convert.ToDouble(right);
+                        }
+                        else
+                        {
+                            Result = left + right;
+                        }
+                        break;
+
+                    case BinaryExpressionType.Times:
+                        Result = left * right;
+                        break;
+
+                    case BinaryExpressionType.BitwiseAnd:
+                        Result = left & right;
+                        break;
+
+
+                    case BinaryExpressionType.BitwiseOr:
+                        Result = left | right;
+                        break;
+
+
+                    case BinaryExpressionType.BitwiseXOr:
+                        Result = left ^ right;
+                        break;
+
+
+                    case BinaryExpressionType.LeftShift:
+                        Result = left << right;
+                        break;
+
+                    case BinaryExpressionType.RightShift:
+                        Result = left >> right;
+                        break;
                 }
-                return rightValue;
-            };
-
-            switch (expression.Type)
+            }
+            catch (Exception e)
             {
-                case BinaryExpressionType.And:
-                    Result = Convert.ToBoolean(left()) && Convert.ToBoolean(right());
-                    break;
-
-                case BinaryExpressionType.Or:
-                    Result = Convert.ToBoolean(left()) || Convert.ToBoolean(right());
-                    break;
-
-                case BinaryExpressionType.Div:
-                    Result = IsReal(left()) || IsReal(right())
-                                 ? Numbers.Divide(left(), right())
-                                 : Numbers.Divide(Convert.ToDouble(left()), right());
-                    break;
-
-                case BinaryExpressionType.Equal:
-                    // Use the type of the left operand to make the comparison
-                    Result = CompareUsingMostPreciseType(left(), right()) == 0;
-                    break;
-
-                case BinaryExpressionType.Greater:
-                    // Use the type of the left operand to make the comparison
-                    Result = CompareUsingMostPreciseType(left(), right()) > 0;
-                    break;
-
-                case BinaryExpressionType.GreaterOrEqual:
-                    // Use the type of the left operand to make the comparison
-                    Result = CompareUsingMostPreciseType(left(), right()) >= 0;
-                    break;
-
-                case BinaryExpressionType.Lesser:
-                    // Use the type of the left operand to make the comparison
-                    Result = CompareUsingMostPreciseType(left(), right()) < 0;
-                    break;
-
-                case BinaryExpressionType.LesserOrEqual:
-                    // Use the type of the left operand to make the comparison
-                    Result = CompareUsingMostPreciseType(left(), right()) <= 0;
-                    break;
-
-                case BinaryExpressionType.Minus:
-                    Result = Numbers.Soustract(left(), right());
-                    break;
-
-                case BinaryExpressionType.Modulo:
-                    Result = Numbers.Modulo(left(), right());
-                    break;
-
-                case BinaryExpressionType.NotEqual:
-                    // Use the type of the left operand to make the comparison
-                    Result = CompareUsingMostPreciseType(left(), right()) != 0;
-                    break;
-
-                case BinaryExpressionType.Plus:
-                    if (left() is string)
-                    {
-                        Result = String.Concat(left(), right());
-                    }
-                    else
-                    {
-                        Result = Numbers.Add(left(), right());
-                    }
-
-                    break;
-
-                case BinaryExpressionType.Times:
-                    Result = Numbers.Multiply(left(), right());
-                    break;
-
-                case BinaryExpressionType.BitwiseAnd:
-                    Result = Convert.ToUInt16(left()) & Convert.ToUInt16(right());
-                    break;
-
-                case BinaryExpressionType.BitwiseOr:
-                    Result = Convert.ToUInt16(left()) | Convert.ToUInt16(right());
-                    break;
-
-                case BinaryExpressionType.BitwiseXOr:
-                    Result = Convert.ToUInt16(left()) ^ Convert.ToUInt16(right());
-                    break;
-
-                case BinaryExpressionType.LeftShift:
-                    Result = Convert.ToUInt16(left()) << Convert.ToUInt16(right());
-                    break;
-
-                case BinaryExpressionType.RightShift:
-                    Result = Convert.ToUInt16(left()) >> Convert.ToUInt16(right());
-                    break;
+                throw new InvalidOperationException(e.Message);
             }
         }
 
@@ -198,15 +203,15 @@ namespace NCalc2.Visitors
             switch (expression.Type)
             {
                 case UnaryExpressionType.Not:
-                    Result = !Convert.ToBoolean(Result);
+                    Result = !(dynamic)Result;
                     break;
 
                 case UnaryExpressionType.Negate:
-                    Result = Numbers.Soustract(0, Result);
+                    Result = 0 - (dynamic)Result;
                     break;
 
                 case UnaryExpressionType.BitwiseNot:
-                    Result = ~Convert.ToUInt16(Result);
+                    Result = ~(dynamic)Result;
                     break;
             }
         }
@@ -219,16 +224,16 @@ namespace NCalc2.Visitors
         public override void Visit(FunctionExpression function)
         {
             var args = new FunctionArgs
-                           {
-                               Parameters = new Expression[function.Expressions.Length]
-                           };
+            {
+                Parameters = new Expression[function.Expressions.Length]
+            };
 
             // Don't call parameters right now, instead let the function do it as needed.
             // Some parameters shouldn't be called, for instance, in a if(), the "not" value might be a division by zero
             // Evaluating every value could produce unexpected behaviour
             for (int i = 0; i < function.Expressions.Length; i++)
             {
-                args.Parameters[i] = new Expression(function.Expressions[i], options);
+                args.Parameters[i] = new Expression(function.Expressions[i], _options);
                 args.Parameters[i].EvaluateFunction += EvaluateFunction;
                 args.Parameters[i].EvaluateParameter += EvaluateParameter;
 
@@ -249,7 +254,6 @@ namespace NCalc2.Visitors
             switch (function.Identifier.Name.ToLower())
             {
                 #region Abs
-
                 case "abs":
 
                     CheckCase("Abs", function.Identifier.Name);
@@ -263,10 +267,9 @@ namespace NCalc2.Visitors
 
                     break;
 
-                #endregion Abs
+                #endregion
 
                 #region Acos
-
                 case "acos":
 
                     CheckCase("Acos", function.Identifier.Name);
@@ -278,10 +281,9 @@ namespace NCalc2.Visitors
 
                     break;
 
-                #endregion Acos
+                #endregion
 
                 #region Asin
-
                 case "asin":
 
                     CheckCase("Asin", function.Identifier.Name);
@@ -293,10 +295,9 @@ namespace NCalc2.Visitors
 
                     break;
 
-                #endregion Asin
+                #endregion
 
                 #region Atan
-
                 case "atan":
 
                     CheckCase("Atan", function.Identifier.Name);
@@ -308,10 +309,9 @@ namespace NCalc2.Visitors
 
                     break;
 
-                #endregion Atan
+                #endregion
 
                 #region Ceiling
-
                 case "ceiling":
 
                     CheckCase("Ceiling", function.Identifier.Name);
@@ -323,7 +323,7 @@ namespace NCalc2.Visitors
 
                     break;
 
-                #endregion Ceiling
+                #endregion
 
                 #region Cos
 
@@ -338,10 +338,9 @@ namespace NCalc2.Visitors
 
                     break;
 
-                #endregion Cos
+                #endregion
 
                 #region Exp
-
                 case "exp":
 
                     CheckCase("Exp", function.Identifier.Name);
@@ -353,10 +352,9 @@ namespace NCalc2.Visitors
 
                     break;
 
-                #endregion Exp
+                #endregion
 
                 #region Floor
-
                 case "floor":
 
                     CheckCase("Floor", function.Identifier.Name);
@@ -368,10 +366,9 @@ namespace NCalc2.Visitors
 
                     break;
 
-                #endregion Floor
+                #endregion
 
                 #region IEEERemainder
-
                 case "ieeeremainder":
 
                     CheckCase("IEEERemainder", function.Identifier.Name);
@@ -383,10 +380,9 @@ namespace NCalc2.Visitors
 
                     break;
 
-                #endregion IEEERemainder
+                #endregion
 
                 #region Log
-
                 case "log":
 
                     CheckCase("Log", function.Identifier.Name);
@@ -398,10 +394,9 @@ namespace NCalc2.Visitors
 
                     break;
 
-                #endregion Log
+                #endregion
 
                 #region Log10
-
                 case "log10":
 
                     CheckCase("Log10", function.Identifier.Name);
@@ -413,10 +408,9 @@ namespace NCalc2.Visitors
 
                     break;
 
-                #endregion Log10
+                #endregion
 
                 #region Pow
-
                 case "pow":
 
                     CheckCase("Pow", function.Identifier.Name);
@@ -428,10 +422,9 @@ namespace NCalc2.Visitors
 
                     break;
 
-                #endregion Pow
+                #endregion
 
                 #region Round
-
                 case "round":
 
                     CheckCase("Round", function.Identifier.Name);
@@ -439,16 +432,15 @@ namespace NCalc2.Visitors
                     if (function.Expressions.Length != 2)
                         throw new ArgumentException("Round() takes exactly 2 arguments");
 
-                    MidpointRounding rounding = (options & EvaluateOptions.RoundAwayFromZero) == EvaluateOptions.RoundAwayFromZero ? MidpointRounding.AwayFromZero : MidpointRounding.ToEven;
+                    MidpointRounding rounding = (_options & EvaluateOptions.RoundAwayFromZero) == EvaluateOptions.RoundAwayFromZero ? MidpointRounding.AwayFromZero : MidpointRounding.ToEven;
 
                     Result = Math.Round(Convert.ToDouble(Evaluate(function.Expressions[0])), Convert.ToInt16(Evaluate(function.Expressions[1])), rounding);
 
                     break;
 
-                #endregion Round
+                #endregion
 
                 #region Sign
-
                 case "sign":
 
                     CheckCase("Sign", function.Identifier.Name);
@@ -460,10 +452,9 @@ namespace NCalc2.Visitors
 
                     break;
 
-                #endregion Sign
+                #endregion
 
                 #region Sin
-
                 case "sin":
 
                     CheckCase("Sin", function.Identifier.Name);
@@ -475,10 +466,9 @@ namespace NCalc2.Visitors
 
                     break;
 
-                #endregion Sin
+                #endregion
 
                 #region Sqrt
-
                 case "sqrt":
 
                     CheckCase("Sqrt", function.Identifier.Name);
@@ -490,10 +480,9 @@ namespace NCalc2.Visitors
 
                     break;
 
-                #endregion Sqrt
+                #endregion
 
                 #region Tan
-
                 case "tan":
 
                     CheckCase("Tan", function.Identifier.Name);
@@ -505,10 +494,9 @@ namespace NCalc2.Visitors
 
                     break;
 
-                #endregion Tan
+                #endregion
 
                 #region Truncate
-
                 case "truncate":
 
                     CheckCase("Truncate", function.Identifier.Name);
@@ -520,10 +508,9 @@ namespace NCalc2.Visitors
 
                     break;
 
-                #endregion Truncate
+                #endregion
 
                 #region Max
-
                 case "max":
 
                     CheckCase("Max", function.Identifier.Name);
@@ -531,16 +518,15 @@ namespace NCalc2.Visitors
                     if (function.Expressions.Length != 2)
                         throw new ArgumentException("Max() takes exactly 2 arguments");
 
-                    object maxleft = Evaluate(function.Expressions[0]);
-                    object maxright = Evaluate(function.Expressions[1]);
+                    dynamic maxleft = Evaluate(function.Expressions[0]);
+                    dynamic maxright = Evaluate(function.Expressions[1]);
 
-                    Result = Numbers.Max(maxleft, maxright);
+                    Result = Math.Max(maxleft, maxright);
                     break;
 
-                #endregion Max
+                #endregion
 
                 #region Min
-
                 case "min":
 
                     CheckCase("Min", function.Identifier.Name);
@@ -548,16 +534,15 @@ namespace NCalc2.Visitors
                     if (function.Expressions.Length != 2)
                         throw new ArgumentException("Min() takes exactly 2 arguments");
 
-                    object minleft = Evaluate(function.Expressions[0]);
-                    object minright = Evaluate(function.Expressions[1]);
+                    dynamic minleft = Evaluate(function.Expressions[0]);
+                    dynamic minright = Evaluate(function.Expressions[1]);
 
-                    Result = Numbers.Min(minleft, minright);
+                    Result = Math.Min(minleft, minright);
                     break;
 
-                #endregion Min
+                #endregion
 
                 #region if
-
                 case "if":
 
                     CheckCase("if", function.Identifier.Name);
@@ -570,10 +555,9 @@ namespace NCalc2.Visitors
                     Result = cond ? Evaluate(function.Expressions[1]) : Evaluate(function.Expressions[2]);
                     break;
 
-                #endregion if
+                #endregion
 
                 #region in
-
                 case "in":
 
                     CheckCase("in", function.Identifier.Name);
@@ -599,7 +583,7 @@ namespace NCalc2.Visitors
                     Result = evaluation;
                     break;
 
-                #endregion in
+                #endregion
 
                 default:
                     throw new ArgumentException("Function not found",
@@ -643,7 +627,7 @@ namespace NCalc2.Visitors
                     // The parameter is itself another Expression
                     var expression = (Expression)Parameters[parameter.Name];
 
-                    // Overloads parameters
+                    // Overloads parameters 
                     foreach (var p in Parameters)
                     {
                         expression.Parameters[p.Key] = p.Value;
@@ -681,5 +665,6 @@ namespace NCalc2.Visitors
         }
 
         public Dictionary<string, object> Parameters { get; set; }
+
     }
 }
