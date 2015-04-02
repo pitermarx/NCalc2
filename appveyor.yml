@@ -6,7 +6,7 @@ branches:
 
 environment:
   COVERALLS_REPO_TOKEN:
-    secure: Fn2Rg+MvIJ+uhgKmN+KLa2RH6cnNAfaY7yOZZKzX0RMn+bgzPdL6d0Pg1DigMFZC
+    secure: B3EbXrtduvUHnLiH1yRBSXzpNUCSdraQo+OD4UdpF/SJKd3qFgWa7Q13/7+ukEBi
 
 assembly_info:
   patch: true
@@ -23,9 +23,8 @@ before_build:
 build:
   project: NCalc2.sln
 
-# test_script:
-#   - ps: .\packages\OpenCover.4.5.3522\OpenCover.Console.exe -register:user -target:"packages\NUnit.Runners.2.6.4\tools\nunit-console.exe" -register:user "-targetargs:""Evaluant.Calculator.Tests\bin\$env:CONFIGURATION\NCalc.Tests.dll"" /noshadow" -filter:"+[NCalc*]*" -output:opencoverCoverage.xml
-#   - ps: .\packages\coveralls.net.0.5.0\csmacnz.Coveralls.exe --opencover -i opencoverCoverage.xml --repoToken $env:COVERALLS_REPO_TOKEN --commitId $env:APPVEYOR_REPO_COMMIT --commitBranch $env:APPVEYOR_REPO_BRANCH --commitAuthor $env:APPVEYOR_REPO_COMMIT_AUTHOR --commitEmail $env:APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL --commitMessage $env:APPVEYOR_REPO_COMMIT_MESSAGE --jobId $env:APPVEYOR_JOB_ID
+test_script:
+  - ps: .\testRun.ps1
 
 after_test:
   - ps: .\nuget\pack.ps1
