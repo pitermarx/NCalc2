@@ -23,8 +23,11 @@ before_build:
   - nuget restore .\NCalc2.sln
 
 build:
-  - cov-build --dir cov-int msbuild /t:Rebuild NCalc2.sln
+  project: NCalc2.sln
 
+build_script:
+  - cov-build --dir cov-int msbuild /t:Rebuild
+  
 test_script:
   - ps: .\scripts\test_Script.ps1
 
