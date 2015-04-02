@@ -24,7 +24,7 @@ build:
   project: NCalc2.sln
 
 test_script:
-  - ps: .\testRun.ps1
+  - ps: .\scripts\testRun.ps1
 
 after_test:
   - ps: .\nuget\pack.ps1
