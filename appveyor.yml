@@ -5,6 +5,8 @@ branches:
     - master
 
 environment:
+  CoverityProjectToken:
+    secure: tgzxkZ3KF15o6qD8VCuG7a2a/uqM87IYTdjC1xF2Hns=
   COVERALLS_REPO_TOKEN:
     secure: B3EbXrtduvUHnLiH1yRBSXzpNUCSdraQo+OD4UdpF/SJKd3qFgWa7Q13/7+ukEBi
 
@@ -21,7 +23,7 @@ before_build:
   - nuget restore .\NCalc2.sln
 
 build:
-  project: NCalc2.sln
+  - cov-build --dir cov-int msbuild /t:Rebuild NCalc2.sln
 
 test_script:
   - ps: .\scripts\test_Script.ps1
