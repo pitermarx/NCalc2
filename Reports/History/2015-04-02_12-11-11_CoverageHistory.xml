@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<coverage version="1.0" date="2015-04-02_12-11-11">
+  <assembly name="NCalc">
+    <class name="NCalc2.ErrorListener" coveredlines="4" coverablelines="4" totallines="16" coveredbranches="0" totalbranches="0" />
+    <class name="NCalc2.EvaluateFunctionHandler" coveredlines="0" coverablelines="0" totallines="0" coveredbranches="0" totalbranches="0" />
+    <class name="NCalc2.EvaluateParameterHandler" coveredlines="0" coverablelines="0" totallines="0" coveredbranches="0" totalbranches="0" />
+    <class name="NCalc2.EvaluationException" coveredlines="4" coverablelines="8" totallines="17" coveredbranches="0" totalbranches="0" />
+    <class name="NCalc2.Expression" coveredlines="159" coverablelines="181" totallines="290" coveredbranches="46" totalbranches="62" />
+    <class name="NCalc2.Expressions.BinaryExpression" coveredlines="12" coverablelines="12" totallines="48" coveredbranches="0" totalbranches="0" />
+    <class name="NCalc2.Expressions.FunctionExpression" coveredlines="10" coverablelines="10" totallines="22" coveredbranches="0" totalbranches="0" />
+    <class name="NCalc2.Expressions.IdentifierExpression" coveredlines="8" coverablelines="8" totallines="19" coveredbranches="0" totalbranches="0" />
+    <class name="NCalc2.Expressions.LogicalExpression" coveredlines="5" coverablelines="5" totallines="17" coveredbranches="0" totalbranches="0" />
+    <class name="NCalc2.Expressions.TernaryExpression" coveredlines="12" coverablelines="12" totallines="25" coveredbranches="0" totalbranches="0" />
+    <class name="NCalc2.Expressions.UnaryExpression" coveredlines="10" coverablelines="10" totallines="29" coveredbranches="0" totalbranches="0" />
+    <class name="NCalc2.Expressions.ValueExpression" coveredlines="37" coverablelines="51" totallines="102" coveredbranches="2" totalbranches="17" />
+    <class name="NCalc2.FunctionArgs" coveredlines="9" coverablelines="17" totallines="40" coveredbranches="0" totalbranches="2" />
+    <class name="NCalc2.NCalc2BaseListener" coveredlines="0" coverablelines="36" totallines="264" coveredbranches="0" totalbranches="0" />
+    <class name="NCalc2.NCalc2BaseVisitor`1" coveredlines="0" coverablelines="16" totallines="218" coveredbranches="0" totalbranches="0" />
+    <class name="NCalc2.NCalc2Lexer" coveredlines="130" coverablelines="160" totallines="225" coveredbranches="0" totalbranches="15" />
+    <class name="NCalc2.NCalc2Parser" coveredlines="1014" coverablelines="1531" totallines="1849" coveredbranches="154" totalbranches="369" />
+    <class name="NCalc2.ParameterArgs" coveredlines="6" coverablelines="6" totallines="21" coveredbranches="0" totalbranches="0" />
+    <class name="NCalc2.Visitors.EvaluationVisitor" coveredlines="271" coverablelines="312" totallines="670" coveredbranches="183" totalbranches="230" />
+    <class name="NCalc2.Visitors.LogicalExpressionVisitor" coveredlines="0" coverablelines="0" totallines="0" coveredbranches="0" totalbranches="0" />
+    <class name="NCalc2.Visitors.SerializationVisitor" coveredlines="87" coverablelines="111" totallines="214" coveredbranches="30" totalbranches="39" />
+  </assembly>
+  <assembly name="NCalc.Tests">
+    <class name="NCalc2.Tests.Fixtures" coveredlines="423" coverablelines="443" totallines="638" coveredbranches="41" totalbranches="64" />
+    <class name="NCalc2.Tests.PerformanceTests" coveredlines="15" coverablelines="29" totallines="50" coveredbranches="0" totalbranches="8" />
+  </assembly>
+</coverage>

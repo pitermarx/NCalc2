@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html data-ng-app="coverageApp">
+<head>
+<meta charset="utf-8" />
+<title>Summary - Coverage Report</title>
+<link rel="stylesheet" type="text/css" href="report.css" />
+</head><body data-ng-controller="SummaryViewCtrl"><div class="container">
+<h1>Summary</h1>
+<table class="overview">
+<colgroup>
+<col style="width: 135px;" />
+<col />
+</colgroup>
+<tbody>
+<tr><th>Generated on:</th><td>02/04/2015 - 12:11:14</td></tr>
+<tr><th>Parser:</th><td>OpenCoverParser</td></tr>
+<tr><th>Assemblies:</th><td>2</td></tr>
+<tr><th>Classes:</th><td>23</td></tr>
+<tr><th>Files:</th><td>20</td></tr>
+<tr><th>Covered lines:</th><td>2216</td></tr>
+<tr><th>Uncovered lines:</th><td>746</td></tr>
+<tr><th>Coverable lines:</th><td>2962</td></tr>
+<tr><th>Total lines:</th><td>4774</td></tr>
+<tr><th>Line Coverage:</th><td>74.8%</td></tr>
+<tr><th>Branch coverage:</th><td>56.5%</td></tr>
+</tbody>
+</table>
+<h1>History</h1>
+<div id="chart4b8fc8abef624937953c147d9119bf75" class="ct-chart" data-history-chart data-data="chartData4b8fc8abef624937953c147d9119bf75"></div>
+<script type="text/javascript">
+/* <![CDATA[ */
+var chartData4b8fc8abef624937953c147d9119bf75 = {
+    "series" : [[74.8],[56.5]],
+    "tooltips" : ['<h3>02/04/2015 - 12:11:11</h3><br /><span class="linecoverage"></span> Line Coverage: 74.8% (2216/2962)<br /><span class="branchcoverage"></span> Branch coverage: 56.5% (456/806)<br />Total lines: 4774']
+};
+/* ]]> */
+</script>
+<h1>Assemblies</h1>
+<div data-ng-if="filteringEnabled" data-reactive-table data-data="assemblies"></div>
+<div data-ng-if="!filteringEnabled">
+<div id="filterButtonContainer" class="customizebox" style="display: none;"><input data-ng-click="enableFiltering()" value="Enable filtering" title="This may take some time since the report contains many classes." type="submit" /></div>
+<script type="text/javascript">
+/* <![CDATA[ */
+document.getElementById('filterButtonContainer').style.display = 'block';
+/* ]]> */
+</script>
+</div>
+<table data-ng-if="!filteringEnabled" class="overview">
+<colgroup>
+<col />
+<col style="width: 90px;" />
+<col style="width: 105px;" />
+<col style="width: 100px;" />
+<col style="width: 70px;" />
+<col style="width: 60px;" />
+<col style="width: 112px;" />
+<col style="width: 60px;" />
+<col style="width: 112px;" />
+</colgroup>
+<thead><tr><th>Name</th><th class="right">Covered</th><th class="right">Uncovered</th><th class="right">Coverable</th><th class="right">Total</th><th class="center" colspan="2">Line Coverage</th><th class="center" colspan="2">Branch coverage</th></tr></thead>
+<tbody>
+<tr><th>NCalc</th><th class="right">1778</th><th class="right">712</th><th class="right">2490</th><th class="right">4086</th><th title="LineCoverage" class="right">71.4%</th><th><table class="coverage"><tr><td class="green" style="width: 71px;">&nbsp;</td><td class="red" style="width: 29px;">&nbsp;</td></tr></table></th><th class="right">56.5%</th><th><table class="coverage"><tr><td class="green" style="width: 56px;">&nbsp;</td><td class="red" style="width: 44px;">&nbsp;</td></tr></table></th></tr>
+<tr><td><a href="NCalc_ErrorListener.htm">NCalc2.ErrorListener</a></td><td class="right">4</td><td class="right">0</td><td class="right">4</td><td class="right">16</td><td title="LineCoverage" class="right">100%</td><td><table class="coverage"><tr><td class="green" style="width: 100px;">&nbsp;</td></tr></table></td><td class="right"></td><td><table class="coverage"><tr><td class="gray" style="width: 100px;">&nbsp;</td></tr></table></td></tr>
+<tr><td><a href="NCalc_EvaluateFunctionHandler.htm">NCalc2.EvaluateFunctionHandler</a></td><td class="right">0</td><td class="right">0</td><td class="right">0</td><td class="right">0</td><td title="MethodCoverage" class="right">0%</td><td><table class="coverage"><tr><td class="red" style="width: 100px;">&nbsp;</td></tr></table></td><td class="right"></td><td><table class="coverage"><tr><td class="gray" style="width: 100px;">&nbsp;</td></tr></table></td></tr>
+<tr><td><a href="NCalc_EvaluateParameterHandler.htm">NCalc2.EvaluateParameterHandler</a></td><td class="right">0</td><td class="right">0</td><td class="right">0</td><td class="right">0</td><td title="MethodCoverage" class="right">0%</td><td><table class="coverage"><tr><td class="red" style="width: 100px;">&nbsp;</td></tr></table></td><td class="right"></td><td><table class="coverage"><tr><td class="gray" style="width: 100px;">&nbsp;</td></tr></table></td></tr>
+<tr><td><a href="NCalc_EvaluationException.htm">NCalc2.EvaluationException</a></td><td class="right">4</td><td class="right">4</td><td class="right">8</td><td class="right">17</td><td title="LineCoverage" class="right">50%</td><td><table class="coverage"><tr><td class="green" style="width: 50px;">&nbsp;</td><td class="red" style="width: 50px;">&nbsp;</td></tr></table></td><td class="right"></td><td><table class="coverage"><tr><td class="gray" style="width: 100px;">&nbsp;</td></tr></table></td></tr>
+<tr><td><a href="NCalc_Expression.htm">NCalc2.Expression</a></td><td class="right">159</td><td class="right">22</td><td class="right">181</td><td class="right">290</td><td title="LineCoverage" class="right">87.8%</td><td><table class="coverage"><tr><td class="green" style="width: 88px;">&nbsp;</td><td class="red" style="width: 12px;">&nbsp;</td></tr></table></td><td class="right">74.1%</td><td><table class="coverage"><tr><td class="green" style="width: 74px;">&nbsp;</td><td class="red" style="width: 26px;">&nbsp;</td></tr></table></td></tr>
+<tr><td><a href="NCalc_BinaryExpression.htm">NCalc2.Expressions.BinaryExpression</a></td><td class="right">12</td><td class="right">0</td><td class="right">12</td><td class="right">48</td><td title="LineCoverage" class="right">100%</td><td><table class="coverage"><tr><td class="green" style="width: 100px;">&nbsp;</td></tr></table></td><td class="right"></td><td><table class="coverage"><tr><td class="gray" style="width: 100px;">&nbsp;</td></tr></table></td></tr>
+<tr><td><a href="NCalc_FunctionExpression.htm">NCalc2.Expressions.FunctionExpression</a></td><td class="right">10</td><td class="right">0</td><td class="right">10</td><td class="right">22</td><td title="LineCoverage" class="right">100%</td><td><table class="coverage"><tr><td class="green" style="width: 100px;">&nbsp;</td></tr></table></td><td class="right"></td><td><table class="coverage"><tr><td class="gray" style="width: 100px;">&nbsp;</td></tr></table></td></tr>
+<tr><td><a href="NCalc_IdentifierExpression.htm">NCalc2.Expressions.IdentifierExpression</a></td><td class="right">8</td><td class="right">0</td><td class="right">8</td><td class="right">19</td><td title="LineCoverage" class="right">100%</td><td><table class="coverage"><tr><td class="green" style="width: 100px;">&nbsp;</td></tr></table></td><td class="right"></td><td><table class="coverage"><tr><td class="gray" style="width: 100px;">&nbsp;</td></tr></table></td></tr>
+<tr><td><a href="NCalc_LogicalExpression.htm">NCalc2.Expressions.LogicalExpression</a></td><td class="right">5</td><td class="right">0</td><td class="right">5</td><td class="right">17</td><td title="LineCoverage" class="right">100%</td><td><table class="coverage"><tr><td class="green" style="width: 100px;">&nbsp;</td></tr></table></td><td class="right"></td><td><table class="coverage"><tr><td class="gray" style="width: 100px;">&nbsp;</td></tr></table></td></tr>
+<tr><td><a href="NCalc_TernaryExpression.htm">NCalc2.Expressions.TernaryExpression</a></td><td class="right">12</td><td class="right">0</td><td class="right">12</td><td class="right">25</td><td title="LineCoverage" class="right">100%</td><td><table class="coverage"><tr><td class="green" style="width: 100px;">&nbsp;</td></tr></table></td><td class="right"></td><td><table class="coverage"><tr><td class="gray" style="width: 100px;">&nbsp;</td></tr></table></td></tr>
+<tr><td><a href="NCalc_UnaryExpression.htm">NCalc2.Expressions.UnaryExpression</a></td><td class="right">10</td><td class="right">0</td><td class="right">10</td><td class="right">29</td><td title="LineCoverage" class="right">100%</td><td><table class="coverage"><tr><td class="green" style="width: 100px;">&nbsp;</td></tr></table></td><td class="right"></td><td><table class="coverage"><tr><td class="gray" style="width: 100px;">&nbsp;</td></tr></table></td></tr>
+<tr><td><a href="NCalc_ValueExpression.htm">NCalc2.Expressions.ValueExpression</a></td><td class="right">37</td><td class="right">14</td><td class="right">51</td><td class="right">102</td><td title="LineCoverage" class="right">72.5%</td><td><table class="coverage"><tr><td class="green" style="width: 72px;">&nbsp;</td><td class="red" style="width: 28px;">&nbsp;</td></tr></table></td><td class="right">11.7%</td><td><table class="coverage"><tr><td class="green" style="width: 12px;">&nbsp;</td><td class="red" style="width: 88px;">&nbsp;</td></tr></table></td></tr>
+<tr><td><a href="NCalc_FunctionArgs.htm">NCalc2.FunctionArgs</a></td><td class="right">9</td><td class="right">8</td><td class="right">17</td><td class="right">40</td><td title="LineCoverage" class="right">52.9%</td><td><table class="coverage"><tr><td class="green" style="width: 53px;">&nbsp;</td><td class="red" style="width: 47px;">&nbsp;</td></tr></table></td><td class="right">0%</td><td><table class="coverage"><tr><td class="red" style="width: 100px;">&nbsp;</td></tr></table></td></tr>
+<tr><td><a href="NCalc_NCalc2BaseListener.htm">NCalc2.NCalc2BaseListener</a></td><td class="right">0</td><td class="right">36</td><td class="right">36</td><td class="right">264</td><td title="LineCoverage" class="right">0%</td><td><table class="coverage"><tr><td class="red" style="width: 100px;">&nbsp;</td></tr></table></td><td class="right"></td><td><table class="coverage"><tr><td class="gray" style="width: 100px;">&nbsp;</td></tr></table></td></tr>
+<tr><td><a href="NCalc_NCalc2BaseVisitor_1.htm">NCalc2.NCalc2BaseVisitor`1</a></td><td class="right">0</td><td class="right">16</td><td class="right">16</td><td class="right">218</td><td title="LineCoverage" class="right">0%</td><td><table class="coverage"><tr><td class="red" style="width: 100px;">&nbsp;</td></tr></table></td><td class="right"></td><td><table class="coverage"><tr><td class="gray" style="width: 100px;">&nbsp;</td></tr></table></td></tr>
+<tr><td><a href="NCalc_NCalc2Lexer.htm">NCalc2.NCalc2Lexer</a></td><td class="right">130</td><td class="right">30</td><td class="right">160</td><td class="right">225</td><td title="LineCoverage" class="right">81.2%</td><td><table class="coverage"><tr><td class="green" style="width: 81px;">&nbsp;</td><td class="red" style="width: 19px;">&nbsp;</td></tr></table></td><td class="right">0%</td><td><table class="coverage"><tr><td class="red" style="width: 100px;">&nbsp;</td></tr></table></td></tr>
+<tr><td><a href="NCalc_NCalc2Parser.htm">NCalc2.NCalc2Parser</a></td><td class="right">1014</td><td class="right">517</td><td class="right">1531</td><td class="right">1849</td><td title="LineCoverage" class="right">66.2%</td><td><table class="coverage"><tr><td class="green" style="width: 66px;">&nbsp;</td><td class="red" style="width: 34px;">&nbsp;</td></tr></table></td><td class="right">41.7%</td><td><table class="coverage"><tr><td class="green" style="width: 42px;">&nbsp;</td><td class="red" style="width: 58px;">&nbsp;</td></tr></table></td></tr>
+<tr><td><a href="NCalc_ParameterArgs.htm">NCalc2.ParameterArgs</a></td><td class="right">6</td><td class="right">0</td><td class="right">6</td><td class="right">21</td><td title="LineCoverage" class="right">100%</td><td><table class="coverage"><tr><td class="green" style="width: 100px;">&nbsp;</td></tr></table></td><td class="right"></td><td><table class="coverage"><tr><td class="gray" style="width: 100px;">&nbsp;</td></tr></table></td></tr>
+<tr><td><a href="NCalc_EvaluationVisitor.htm">NCalc2.Visitors.EvaluationVisitor</a></td><td class="right">271</td><td class="right">41</td><td class="right">312</td><td class="right">670</td><td title="LineCoverage" class="right">86.8%</td><td><table class="coverage"><tr><td class="green" style="width: 87px;">&nbsp;</td><td class="red" style="width: 13px;">&nbsp;</td></tr></table></td><td class="right">79.5%</td><td><table class="coverage"><tr><td class="green" style="width: 80px;">&nbsp;</td><td class="red" style="width: 20px;">&nbsp;</td></tr></table></td></tr>
+<tr><td><a href="NCalc_LogicalExpressionVisitor.htm">NCalc2.Visitors.LogicalExpressionVisitor</a></td><td class="right">0</td><td class="right">0</td><td class="right">0</td><td class="right">0</td><td title="MethodCoverage" class="right"></td><td><table class="coverage"><tr><td class="gray" style="width: 100px;">&nbsp;</td></tr></table></td><td class="right"></td><td><table class="coverage"><tr><td class="gray" style="width: 100px;">&nbsp;</td></tr></table></td></tr>
+<tr><td><a href="NCalc_SerializationVisitor.htm">NCalc2.Visitors.SerializationVisitor</a></td><td class="right">87</td><td class="right">24</td><td class="right">111</td><td class="right">214</td><td title="LineCoverage" class="right">78.3%</td><td><table class="coverage"><tr><td class="green" style="width: 78px;">&nbsp;</td><td class="red" style="width: 22px;">&nbsp;</td></tr></table></td><td class="right">76.9%</td><td><table class="coverage"><tr><td class="green" style="width: 77px;">&nbsp;</td><td class="red" style="width: 23px;">&nbsp;</td></tr></table></td></tr>
+<tr><th>NCalc.Tests</th><th class="right">438</th><th class="right">34</th><th class="right">472</th><th class="right">688</th><th title="LineCoverage" class="right">92.7%</th><th><table class="coverage"><tr><td class="green" style="width: 93px;">&nbsp;</td><td class="red" style="width: 7px;">&nbsp;</td></tr></table></th><th class="right">56.9%</th><th><table class="coverage"><tr><td class="green" style="width: 57px;">&nbsp;</td><td class="red" style="width: 43px;">&nbsp;</td></tr></table></th></tr>
+<tr><td><a href="NCalc.Tests_Fixtures.htm">NCalc2.Tests.Fixtures</a></td><td class="right">423</td><td class="right">20</td><td class="right">443</td><td class="right">638</td><td title="LineCoverage" class="right">95.4%</td><td><table class="coverage"><tr><td class="green" style="width: 95px;">&nbsp;</td><td class="red" style="width: 5px;">&nbsp;</td></tr></table></td><td class="right">64%</td><td><table class="coverage"><tr><td class="green" style="width: 64px;">&nbsp;</td><td class="red" style="width: 36px;">&nbsp;</td></tr></table></td></tr>
+<tr><td><a href="NCalc.Tests_PerformanceTests.htm">NCalc2.Tests.PerformanceTests</a></td><td class="right">15</td><td class="right">14</td><td class="right">29</td><td class="right">50</td><td title="LineCoverage" class="right">51.7%</td><td><table class="coverage"><tr><td class="green" style="width: 52px;">&nbsp;</td><td class="red" style="width: 48px;">&nbsp;</td></tr></table></td><td class="right">0%</td><td><table class="coverage"><tr><td class="red" style="width: 100px;">&nbsp;</td></tr></table></td></tr>
+</tbody>
+</table>
+<script type="text/javascript">
+/* <![CDATA[ */
+var assemblies = [
+  {
+    "name" : "NCalc",
+    "classes" : [
+    {  "name" : "NCalc2.ErrorListener", "reportPath" : "NCalc_ErrorListener.htm", "coveredLines" : 4, "uncoveredLines" : 0, "coverableLines" : 4, "totalLines" : 16, "coverageType" : "LineCoverage", "methodCoverage" : "-", "coveredBranches" : 0, "totalBranches" : 0, "lineCoverageHistory" : [100], "branchCoverageHistory" : [] },
+    {  "name" : "NCalc2.EvaluateFunctionHandler", "reportPath" : "NCalc_EvaluateFunctionHandler.htm", "coveredLines" : 0, "uncoveredLines" : 0, "coverableLines" : 0, "totalLines" : 0, "coverageType" : "MethodCoverage", "methodCoverage" : 0, "coveredBranches" : 0, "totalBranches" : 0, "lineCoverageHistory" : [0], "branchCoverageHistory" : [] },
+    {  "name" : "NCalc2.EvaluateParameterHandler", "reportPath" : "NCalc_EvaluateParameterHandler.htm", "coveredLines" : 0, "uncoveredLines" : 0, "coverableLines" : 0, "totalLines" : 0, "coverageType" : "MethodCoverage", "methodCoverage" : 0, "coveredBranches" : 0, "totalBranches" : 0, "lineCoverageHistory" : [0], "branchCoverageHistory" : [] },
+    {  "name" : "NCalc2.EvaluationException", "reportPath" : "NCalc_EvaluationException.htm", "coveredLines" : 4, "uncoveredLines" : 4, "coverableLines" : 8, "totalLines" : 17, "coverageType" : "LineCoverage", "methodCoverage" : "-", "coveredBranches" : 0, "totalBranches" : 0, "lineCoverageHistory" : [50], "branchCoverageHistory" : [] },
+    {  "name" : "NCalc2.Expression", "reportPath" : "NCalc_Expression.htm", "coveredLines" : 159, "uncoveredLines" : 22, "coverableLines" : 181, "totalLines" : 290, "coverageType" : "LineCoverage", "methodCoverage" : "-", "coveredBranches" : 46, "totalBranches" : 62, "lineCoverageHistory" : [87.8], "branchCoverageHistory" : [74.1] },
+    {  "name" : "NCalc2.Expressions.BinaryExpression", "reportPath" : "NCalc_BinaryExpression.htm", "coveredLines" : 12, "uncoveredLines" : 0, "coverableLines" : 12, "totalLines" : 48, "coverageType" : "LineCoverage", "methodCoverage" : "-", "coveredBranches" : 0, "totalBranches" : 0, "lineCoverageHistory" : [100], "branchCoverageHistory" : [] },
+    {  "name" : "NCalc2.Expressions.FunctionExpression", "reportPath" : "NCalc_FunctionExpression.htm", "coveredLines" : 10, "uncoveredLines" : 0, "coverableLines" : 10, "totalLines" : 22, "coverageType" : "LineCoverage", "methodCoverage" : "-", "coveredBranches" : 0, "totalBranches" : 0, "lineCoverageHistory" : [100], "branchCoverageHistory" : [] },
+    {  "name" : "NCalc2.Expressions.IdentifierExpression", "reportPath" : "NCalc_IdentifierExpression.htm", "coveredLines" : 8, "uncoveredLines" : 0, "coverableLines" : 8, "totalLines" : 19, "coverageType" : "LineCoverage", "methodCoverage" : "-", "coveredBranches" : 0, "totalBranches" : 0, "lineCoverageHistory" : [100], "branchCoverageHistory" : [] },
+    {  "name" : "NCalc2.Expressions.LogicalExpression", "reportPath" : "NCalc_LogicalExpression.htm", "coveredLines" : 5, "uncoveredLines" : 0, "coverableLines" : 5, "totalLines" : 17, "coverageType" : "LineCoverage", "methodCoverage" : "-", "coveredBranches" : 0, "totalBranches" : 0, "lineCoverageHistory" : [100], "branchCoverageHistory" : [] },
+    {  "name" : "NCalc2.Expressions.TernaryExpression", "reportPath" : "NCalc_TernaryExpression.htm", "coveredLines" : 12, "uncoveredLines" : 0, "coverableLines" : 12, "totalLines" : 25, "coverageType" : "LineCoverage", "methodCoverage" : "-", "coveredBranches" : 0, "totalBranches" : 0, "lineCoverageHistory" : [100], "branchCoverageHistory" : [] },
+    {  "name" : "NCalc2.Expressions.UnaryExpression", "reportPath" : "NCalc_UnaryExpression.htm", "coveredLines" : 10, "uncoveredLines" : 0, "coverableLines" : 10, "totalLines" : 29, "coverageType" : "LineCoverage", "methodCoverage" : "-", "coveredBranches" : 0, "totalBranches" : 0, "lineCoverageHistory" : [100], "branchCoverageHistory" : [] },
+    {  "name" : "NCalc2.Expressions.ValueExpression", "reportPath" : "NCalc_ValueExpression.htm", "coveredLines" : 37, "uncoveredLines" : 14, "coverableLines" : 51, "totalLines" : 102, "coverageType" : "LineCoverage", "methodCoverage" : "-", "coveredBranches" : 2, "totalBranches" : 17, "lineCoverageHistory" : [72.5], "branchCoverageHistory" : [11.7] },
+    {  "name" : "NCalc2.FunctionArgs", "reportPath" : "NCalc_FunctionArgs.htm", "coveredLines" : 9, "uncoveredLines" : 8, "coverableLines" : 17, "totalLines" : 40, "coverageType" : "LineCoverage", "methodCoverage" : "-", "coveredBranches" : 0, "totalBranches" : 2, "lineCoverageHistory" : [52.9], "branchCoverageHistory" : [0] },
+    {  "name" : "NCalc2.NCalc2BaseListener", "reportPath" : "NCalc_NCalc2BaseListener.htm", "coveredLines" : 0, "uncoveredLines" : 36, "coverableLines" : 36, "totalLines" : 264, "coverageType" : "LineCoverage", "methodCoverage" : "-", "coveredBranches" : 0, "totalBranches" : 0, "lineCoverageHistory" : [0], "branchCoverageHistory" : [] },
+    {  "name" : "NCalc2.NCalc2BaseVisitor`1", "reportPath" : "NCalc_NCalc2BaseVisitor_1.htm", "coveredLines" : 0, "uncoveredLines" : 16, "coverableLines" : 16, "totalLines" : 218, "coverageType" : "LineCoverage", "methodCoverage" : "-", "coveredBranches" : 0, "totalBranches" : 0, "lineCoverageHistory" : [0], "branchCoverageHistory" : [] },
+    {  "name" : "NCalc2.NCalc2Lexer", "reportPath" : "NCalc_NCalc2Lexer.htm", "coveredLines" : 130, "uncoveredLines" : 30, "coverableLines" : 160, "totalLines" : 225, "coverageType" : "LineCoverage", "methodCoverage" : "-", "coveredBranches" : 0, "totalBranches" : 15, "lineCoverageHistory" : [81.2], "branchCoverageHistory" : [0] },
+    {  "name" : "NCalc2.NCalc2Parser", "reportPath" : "NCalc_NCalc2Parser.htm", "coveredLines" : 1014, "uncoveredLines" : 517, "coverableLines" : 1531, "totalLines" : 1849, "coverageType" : "LineCoverage", "methodCoverage" : "-", "coveredBranches" : 154, "totalBranches" : 369, "lineCoverageHistory" : [66.2], "branchCoverageHistory" : [41.7] },
+    {  "name" : "NCalc2.ParameterArgs", "reportPath" : "NCalc_ParameterArgs.htm", "coveredLines" : 6, "uncoveredLines" : 0, "coverableLines" : 6, "totalLines" : 21, "coverageType" : "LineCoverage", "methodCoverage" : "-", "coveredBranches" : 0, "totalBranches" : 0, "lineCoverageHistory" : [100], "branchCoverageHistory" : [] },
+    {  "name" : "NCalc2.Visitors.EvaluationVisitor", "reportPath" : "NCalc_EvaluationVisitor.htm", "coveredLines" : 271, "uncoveredLines" : 41, "coverableLines" : 312, "totalLines" : 670, "coverageType" : "LineCoverage", "methodCoverage" : "-", "coveredBranches" : 183, "totalBranches" : 230, "lineCoverageHistory" : [86.8], "branchCoverageHistory" : [79.5] },
+    {  "name" : "NCalc2.Visitors.LogicalExpressionVisitor", "reportPath" : "NCalc_LogicalExpressionVisitor.htm", "coveredLines" : 0, "uncoveredLines" : 0, "coverableLines" : 0, "totalLines" : 0, "coverageType" : "MethodCoverage", "methodCoverage" : "-", "coveredBranches" : 0, "totalBranches" : 0, "lineCoverageHistory" : [0], "branchCoverageHistory" : [] },
+    {  "name" : "NCalc2.Visitors.SerializationVisitor", "reportPath" : "NCalc_SerializationVisitor.htm", "coveredLines" : 87, "uncoveredLines" : 24, "coverableLines" : 111, "totalLines" : 214, "coverageType" : "LineCoverage", "methodCoverage" : "-", "coveredBranches" : 30, "totalBranches" : 39, "lineCoverageHistory" : [78.3], "branchCoverageHistory" : [76.9] },
+  ]},
+  {
+    "name" : "NCalc.Tests",
+    "classes" : [
+    {  "name" : "NCalc2.Tests.Fixtures", "reportPath" : "NCalc.Tests_Fixtures.htm", "coveredLines" : 423, "uncoveredLines" : 20, "coverableLines" : 443, "totalLines" : 638, "coverageType" : "LineCoverage", "methodCoverage" : "-", "coveredBranches" : 41, "totalBranches" : 64, "lineCoverageHistory" : [95.4], "branchCoverageHistory" : [64] },
+    {  "name" : "NCalc2.Tests.PerformanceTests", "reportPath" : "NCalc.Tests_PerformanceTests.htm", "coveredLines" : 15, "uncoveredLines" : 14, "coverableLines" : 29, "totalLines" : 50, "coverageType" : "LineCoverage", "methodCoverage" : "-", "coveredBranches" : 0, "totalBranches" : 8, "lineCoverageHistory" : [51.7], "branchCoverageHistory" : [0] },
+  ]},
+];
+/* ]]> */
+</script>
+<div class="footer">Generated by: ReportGenerator 2.1.4.0<br />02/04/2015 - 12:11:14<br /><a href="http://www.palmmedia.de">www.palmmedia.de</a></div></div>
+<script type="text/javascript" src="combined.js"></script>
+</body></html>
