@@ -1,1 +1,1 @@
-nunit-console /noshadow Evaluant.Calculator.Tests\bin\%1\NCalc.Tests.dll
+%1 /noshadow NCalc2.Tests\bin\%2\NCalc2.Tests.dll

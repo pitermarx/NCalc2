@@ -11,6 +11,6 @@
     <tags>mathematical expression parse evaluate</tags>
   </metadata>
   <files>
-    <file src="..\Evaluant.Calculator\bin\Release\NCalc.dll" target="lib\net35\" />
+    <file src="bin\$config$\NCalc2.dll" target="lib\net35\" />
   </files>
 </package>

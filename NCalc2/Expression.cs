@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading;
 using Antlr4.Runtime;
 using NCalc2.Expressions;
+using NCalc2.Grammar;
 using NCalc2.Visitors;
 
 namespace NCalc2

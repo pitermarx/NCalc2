@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>NCalc2.Tests</RootNamespace>
-    <AssemblyName>NCalc.Tests</AssemblyName>
+    <AssemblyName>NCalc2.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -68,7 +68,7 @@
     <Compile Include="Fixtures.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Evaluant.Calculator\NCalc2.csproj">
+    <ProjectReference Include="..\NCalc2\NCalc2.csproj">
       <Project>{5F014003-50D8-49E0-8AFE-91D38DCCC97C}</Project>
       <Name>NCalc2</Name>
     </ProjectReference>

@@ -10,7 +10,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>NCalc2</RootNamespace>
-    <AssemblyName>NCalc</AssemblyName>
+    <AssemblyName>NCalc2</AssemblyName>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
@@ -104,13 +104,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Antlr4 Include="..\Grammar\NCalc2.g4">
-      <Link>NCalc2.g4</Link>
+    <Antlr4 Include="NCalc2.g4">
       <Generator>MSBuild:Compile</Generator>
-      <CustomToolNamespace>NCalc2</CustomToolNamespace>
+      <CustomToolNamespace>NCalc2.Grammar</CustomToolNamespace>
     </Antlr4>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
