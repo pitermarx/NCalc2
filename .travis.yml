@@ -1,0 +1,7 @@
+language: csharp
+install:
+  - sudo apt-get install mono-devel mono-gmcs nunit-console
+  - nuget restore NCalc2.sln
+script:
+  - xbuild CI.proj
+  - nunit-console ./NCalc2.Tests/bin/Release/NCalc2.Tests.dll
