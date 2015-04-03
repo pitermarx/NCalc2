@@ -64,6 +64,27 @@ namespace NCalc2.Tests
         }
 
         [Test]
+        public void EvaluateParameters()
+        {
+            var now = DateTime.Now;
+            var e = new Expression(new FunctionExpression(new IdentifierExpression("t"), new[]
+            {
+                new ValueExpression(1.2),
+                new ValueExpression(now)
+            }), EvaluateOptions.NoCache);
+
+            object[] args = null;
+            e.EvaluateFunction += (name, a) =>
+            {
+                args = a.EvaluateParameters();
+                a.Result = 0;
+            };
+            e.Evaluate();
+
+            Assert.AreEqual(args, new object[]{1.2,now});
+        }
+
+        [Test]
         public void ExpressionShouldEvaluate()
         {
             Expression.CacheEnabled = false;
