@@ -11,6 +11,44 @@ namespace NCalc2.Tests
     public class Fixtures
     {
         [Test]
+        public void MaxMin()
+        {
+            Assert.AreEqual(new Expression("Min(1,0)").Evaluate(), 0);
+            Assert.AreEqual(new Expression("Max(1,0)").Evaluate(), 1);
+        }
+
+        [Test]
+        public void FailConditions()
+        {
+            Assert.Throws<ArgumentException>(() => new Expression(null));
+            Assert.Throws<ArgumentException>(() => new Expression((LogicalExpression)null, EvaluateOptions.None));
+            Assert.Throws<ArgumentException>(() => new Expression("Abs(1,2)").Evaluate());
+            Assert.Throws<ArgumentException>(() => new Expression("Acos(1,2)").Evaluate());
+            Assert.Throws<ArgumentException>(() => new Expression("Asin(1,2)").Evaluate());
+            Assert.Throws<ArgumentException>(() => new Expression("Atan(1,2)").Evaluate());
+            Assert.Throws<ArgumentException>(() => new Expression("Ceiling(1,2)").Evaluate());
+            Assert.Throws<ArgumentException>(() => new Expression("Cos(1,2)").Evaluate());
+            Assert.Throws<ArgumentException>(() => new Expression("Exp(1,2)").Evaluate());
+            Assert.Throws<ArgumentException>(() => new Expression("Floor(1,2)").Evaluate());
+            Assert.Throws<ArgumentException>(() => new Expression("IEEERemainder(1)").Evaluate());
+            Assert.Throws<ArgumentException>(() => new Expression("Log(2)").Evaluate());
+            Assert.Throws<ArgumentException>(() => new Expression("Log10(1,2)").Evaluate());
+            Assert.Throws<ArgumentException>(() => new Expression("Pow(2)").Evaluate());
+            Assert.Throws<ArgumentException>(() => new Expression("Round(2)").Evaluate());
+            Assert.Throws<ArgumentException>(() => new Expression("Sign(2,1)").Evaluate());
+            Assert.Throws<ArgumentException>(() => new Expression("Sin(1,2)").Evaluate());
+            Assert.Throws<ArgumentException>(() => new Expression("Sqrt(1,2)").Evaluate());
+            Assert.Throws<ArgumentException>(() => new Expression("Truncate(1,2)").Evaluate());
+            Assert.Throws<ArgumentException>(() => new Expression("if(1,2)").Evaluate());
+            Assert.Throws<ArgumentException>(() => new Expression("Max(1)").Evaluate());
+            Assert.Throws<ArgumentException>(() => new Expression("max(1)").Evaluate());
+            Assert.Throws<ArgumentException>(() => new Expression("Min(2)").Evaluate());
+            Assert.Throws<ArgumentException>(() => new Expression("in(2)").Evaluate());
+            Assert.Throws<ArgumentException>(() => new Expression("notFound(2)").Evaluate());
+            Assert.Throws<ArgumentException>(() => new Expression("Sin([a])").Evaluate());
+        }
+
+        [Test]
         public void MultipleTernary()
         {
             Assert.AreEqual(new Expression("true ? false ? 2 : 3 : 1").Evaluate(), 3);

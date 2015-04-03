@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using NCalc2.Expressions;
 
 namespace NCalc2.Visitors
@@ -23,11 +22,6 @@ namespace NCalc2.Visitors
         {
             expression.Accept(this);
             return Result;
-        }
-
-        public override void Visit(LogicalExpression expression)
-        {
-            throw new Exception("The method or operation is not implemented.");
         }
 
         /// <summary>
@@ -169,16 +163,13 @@ namespace NCalc2.Visitors
                         Result = left & right;
                         break;
 
-
                     case BinaryExpressionType.BitwiseOr:
                         Result = left | right;
                         break;
 
-
                     case BinaryExpressionType.BitwiseXOr:
                         Result = left ^ right;
                         break;
-
 
                     case BinaryExpressionType.LeftShift:
                         Result = left << right;
@@ -254,6 +245,7 @@ namespace NCalc2.Visitors
             switch (function.Identifier.Name.ToLower())
             {
                 #region Abs
+
                 case "abs":
 
                     CheckCase("Abs", function.Identifier.Name);
@@ -267,9 +259,10 @@ namespace NCalc2.Visitors
 
                     break;
 
-                #endregion
+                #endregion Abs
 
                 #region Acos
+
                 case "acos":
 
                     CheckCase("Acos", function.Identifier.Name);
@@ -281,9 +274,10 @@ namespace NCalc2.Visitors
 
                     break;
 
-                #endregion
+                #endregion Acos
 
                 #region Asin
+
                 case "asin":
 
                     CheckCase("Asin", function.Identifier.Name);
@@ -295,9 +289,10 @@ namespace NCalc2.Visitors
 
                     break;
 
-                #endregion
+                #endregion Asin
 
                 #region Atan
+
                 case "atan":
 
                     CheckCase("Atan", function.Identifier.Name);
@@ -309,9 +304,10 @@ namespace NCalc2.Visitors
 
                     break;
 
-                #endregion
+                #endregion Atan
 
                 #region Ceiling
+
                 case "ceiling":
 
                     CheckCase("Ceiling", function.Identifier.Name);
@@ -323,7 +319,7 @@ namespace NCalc2.Visitors
 
                     break;
 
-                #endregion
+                #endregion Ceiling
 
                 #region Cos
 
@@ -338,9 +334,10 @@ namespace NCalc2.Visitors
 
                     break;
 
-                #endregion
+                #endregion Cos
 
                 #region Exp
+
                 case "exp":
 
                     CheckCase("Exp", function.Identifier.Name);
@@ -352,9 +349,10 @@ namespace NCalc2.Visitors
 
                     break;
 
-                #endregion
+                #endregion Exp
 
                 #region Floor
+
                 case "floor":
 
                     CheckCase("Floor", function.Identifier.Name);
@@ -366,9 +364,10 @@ namespace NCalc2.Visitors
 
                     break;
 
-                #endregion
+                #endregion Floor
 
                 #region IEEERemainder
+
                 case "ieeeremainder":
 
                     CheckCase("IEEERemainder", function.Identifier.Name);
@@ -380,9 +379,10 @@ namespace NCalc2.Visitors
 
                     break;
 
-                #endregion
+                #endregion IEEERemainder
 
                 #region Log
+
                 case "log":
 
                     CheckCase("Log", function.Identifier.Name);
@@ -394,9 +394,10 @@ namespace NCalc2.Visitors
 
                     break;
 
-                #endregion
+                #endregion Log
 
                 #region Log10
+
                 case "log10":
 
                     CheckCase("Log10", function.Identifier.Name);
@@ -408,9 +409,10 @@ namespace NCalc2.Visitors
 
                     break;
 
-                #endregion
+                #endregion Log10
 
                 #region Pow
+
                 case "pow":
 
                     CheckCase("Pow", function.Identifier.Name);
@@ -422,9 +424,10 @@ namespace NCalc2.Visitors
 
                     break;
 
-                #endregion
+                #endregion Pow
 
                 #region Round
+
                 case "round":
 
                     CheckCase("Round", function.Identifier.Name);
@@ -438,9 +441,10 @@ namespace NCalc2.Visitors
 
                     break;
 
-                #endregion
+                #endregion Round
 
                 #region Sign
+
                 case "sign":
 
                     CheckCase("Sign", function.Identifier.Name);
@@ -452,9 +456,10 @@ namespace NCalc2.Visitors
 
                     break;
 
-                #endregion
+                #endregion Sign
 
                 #region Sin
+
                 case "sin":
 
                     CheckCase("Sin", function.Identifier.Name);
@@ -466,9 +471,10 @@ namespace NCalc2.Visitors
 
                     break;
 
-                #endregion
+                #endregion Sin
 
                 #region Sqrt
+
                 case "sqrt":
 
                     CheckCase("Sqrt", function.Identifier.Name);
@@ -480,9 +486,10 @@ namespace NCalc2.Visitors
 
                     break;
 
-                #endregion
+                #endregion Sqrt
 
                 #region Tan
+
                 case "tan":
 
                     CheckCase("Tan", function.Identifier.Name);
@@ -494,9 +501,10 @@ namespace NCalc2.Visitors
 
                     break;
 
-                #endregion
+                #endregion Tan
 
                 #region Truncate
+
                 case "truncate":
 
                     CheckCase("Truncate", function.Identifier.Name);
@@ -508,9 +516,10 @@ namespace NCalc2.Visitors
 
                     break;
 
-                #endregion
+                #endregion Truncate
 
                 #region Max
+
                 case "max":
 
                     CheckCase("Max", function.Identifier.Name);
@@ -524,9 +533,10 @@ namespace NCalc2.Visitors
                     Result = Math.Max(maxleft, maxright);
                     break;
 
-                #endregion
+                #endregion Max
 
                 #region Min
+
                 case "min":
 
                     CheckCase("Min", function.Identifier.Name);
@@ -540,9 +550,10 @@ namespace NCalc2.Visitors
                     Result = Math.Min(minleft, minright);
                     break;
 
-                #endregion
+                #endregion Min
 
                 #region if
+
                 case "if":
 
                     CheckCase("if", function.Identifier.Name);
@@ -555,9 +566,10 @@ namespace NCalc2.Visitors
                     Result = cond ? Evaluate(function.Expressions[1]) : Evaluate(function.Expressions[2]);
                     break;
 
-                #endregion
+                #endregion if
 
                 #region in
+
                 case "in":
 
                     CheckCase("in", function.Identifier.Name);
@@ -583,7 +595,7 @@ namespace NCalc2.Visitors
                     Result = evaluation;
                     break;
 
-                #endregion
+                #endregion in
 
                 default:
                     throw new ArgumentException("Function not found",
@@ -627,7 +639,7 @@ namespace NCalc2.Visitors
                     // The parameter is itself another Expression
                     var expression = (Expression)Parameters[parameter.Name];
 
-                    // Overloads parameters 
+                    // Overloads parameters
                     foreach (var p in Parameters)
                     {
                         expression.Parameters[p.Key] = p.Value;
@@ -665,6 +677,5 @@ namespace NCalc2.Visitors
         }
 
         public Dictionary<string, object> Parameters { get; set; }
-
     }
 }

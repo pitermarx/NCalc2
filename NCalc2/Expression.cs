@@ -35,11 +35,6 @@ namespace NCalc2
             Options = options;
         }
 
-        public Expression(LogicalExpression expression)
-            : this(expression, EvaluateOptions.None)
-        {
-        }
-
         public Expression(LogicalExpression expression, EvaluateOptions options)
         {
             if (expression == null)

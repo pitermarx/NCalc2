@@ -4,8 +4,6 @@ namespace NCalc2.Visitors
 {
     public abstract class LogicalExpressionVisitor
     {
-        public abstract void Visit(LogicalExpression expression);
-
         public abstract void Visit(TernaryExpression expression);
 
         public abstract void Visit(BinaryExpression expression);

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Text;
 using NCalc2.Expressions;
 using ValueType = NCalc2.Expressions.ValueType;
@@ -17,11 +16,6 @@ namespace NCalc2.Visitors
         }
 
         public StringBuilder Result { get; protected set; }
-
-        public override void Visit(LogicalExpression expression)
-        {
-            throw new Exception("The method or operation is not implemented.");
-        }
 
         public override void Visit(TernaryExpression expression)
         {
