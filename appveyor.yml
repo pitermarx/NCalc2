@@ -7,8 +7,10 @@ branches:
 environment:
   COVERITY_TOKEN:
     secure: tgzxkZ3KF15o6qD8VCuG7a2a/uqM87IYTdjC1xF2Hns=
-  COVERALLS_REPO_TOKEN:
+  COVERALLS_TOKEN:
     secure: B3EbXrtduvUHnLiH1yRBSXzpNUCSdraQo+OD4UdpF/SJKd3qFgWa7Q13/7+ukEBi
+  EMAIL:
+    secure: jVVwtBE/3mg3y/cKt5OL+aX2fX3lHCUO08pdfO1i2SE=
 
 assembly_info:
   patch: true
@@ -26,18 +28,14 @@ build:
   project: NCalc2.sln
 
 build_script:
-  - cov-build --dir cov-int msbuild /t:Rebuild
-  - ps: nuget install PublishCoverity
-  - ps: .\PublishCoverity.0.9.0\PublishCoverity.exe compress -o NCalc2.zip
-  - ps: .\PublishCoverity.0.9.0\PublishCoverity.exe publish -t $env:COVERITY_TOKEN -z NCalc2.zip -d "AppVeyor scheduled build ($env:APPVEYOR_BUILD_VERSION)." --codeVersion {version}
+  - ps: .\scripts\build.ps1
 
 test_script:
-  - ps: .\scripts\test_Script.ps1
+  - ps: .\scripts\test.ps1
 
 after_test:
   - ps: .\scripts\pack.ps1
 
 artifacts:
   - path: Evaluant.Calculator\bin\Release\NCalc2.dll
-    name: NCalc2.dll
   - path: '**\NCalc2*.nupkg'

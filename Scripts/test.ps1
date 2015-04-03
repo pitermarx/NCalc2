@@ -16,9 +16,9 @@ if ($isAppVeyor)
     Write-Host "Sending data to Coveralls.io"
     Write-Host "----------------------------"
     & .\packages\coveralls.net.0.5.0\csmacnz.Coveralls.exe --opencover -i results.xml `
-    --repoToken $env:COVERALLS_REPO_TOKEN --commitId $env:APPVEYOR_REPO_COMMIT `
+    --repoToken $env:COVERALLS_TOKEN --commitId $env:APPVEYOR_REPO_COMMIT `
     --commitBranch $env:APPVEYOR_REPO_BRANCH --commitAuthor pitermarx `
-    --commitEmail pedrohmarques@gmail.com --commitMessage $env:APPVEYOR_REPO_COMMIT_MESSAGE `
+    --commitEmail $env:EMAIL --commitMessage $env:APPVEYOR_REPO_COMMIT_MESSAGE `
     --jobId $env:APPVEYOR_JOB_ID
 }
 else
