@@ -123,19 +123,6 @@ public partial class NCalc2Parser : Parser {
 		{
 		}
 		public override int RuleIndex { get { return RULE_ncalc; } }
-		public override void EnterRule(IParseTreeListener listener) {
-			INCalc2Listener typedListener = listener as INCalc2Listener;
-			if (typedListener != null) typedListener.EnterNcalc(this);
-		}
-		public override void ExitRule(IParseTreeListener listener) {
-			INCalc2Listener typedListener = listener as INCalc2Listener;
-			if (typedListener != null) typedListener.ExitNcalc(this);
-		}
-		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			INCalc2Visitor<TResult> typedVisitor = visitor as INCalc2Visitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitNcalc(this);
-			else return visitor.VisitChildren(this);
-		}
 	}
 
 	[RuleVersion(0)]
@@ -181,19 +168,6 @@ public partial class NCalc2Parser : Parser {
 		{
 		}
 		public override int RuleIndex { get { return RULE_expr; } }
-		public override void EnterRule(IParseTreeListener listener) {
-			INCalc2Listener typedListener = listener as INCalc2Listener;
-			if (typedListener != null) typedListener.EnterExpr(this);
-		}
-		public override void ExitRule(IParseTreeListener listener) {
-			INCalc2Listener typedListener = listener as INCalc2Listener;
-			if (typedListener != null) typedListener.ExitExpr(this);
-		}
-		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			INCalc2Visitor<TResult> typedVisitor = visitor as INCalc2Visitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitExpr(this);
-			else return visitor.VisitChildren(this);
-		}
 	}
 
 	[RuleVersion(0)]
@@ -250,19 +224,6 @@ public partial class NCalc2Parser : Parser {
 		{
 		}
 		public override int RuleIndex { get { return RULE_orExpr; } }
-		public override void EnterRule(IParseTreeListener listener) {
-			INCalc2Listener typedListener = listener as INCalc2Listener;
-			if (typedListener != null) typedListener.EnterOrExpr(this);
-		}
-		public override void ExitRule(IParseTreeListener listener) {
-			INCalc2Listener typedListener = listener as INCalc2Listener;
-			if (typedListener != null) typedListener.ExitOrExpr(this);
-		}
-		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			INCalc2Visitor<TResult> typedVisitor = visitor as INCalc2Visitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitOrExpr(this);
-			else return visitor.VisitChildren(this);
-		}
 	}
 
 	[RuleVersion(0)]
@@ -344,19 +305,6 @@ public partial class NCalc2Parser : Parser {
 		{
 		}
 		public override int RuleIndex { get { return RULE_andExpr; } }
-		public override void EnterRule(IParseTreeListener listener) {
-			INCalc2Listener typedListener = listener as INCalc2Listener;
-			if (typedListener != null) typedListener.EnterAndExpr(this);
-		}
-		public override void ExitRule(IParseTreeListener listener) {
-			INCalc2Listener typedListener = listener as INCalc2Listener;
-			if (typedListener != null) typedListener.ExitAndExpr(this);
-		}
-		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			INCalc2Visitor<TResult> typedVisitor = visitor as INCalc2Visitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitAndExpr(this);
-			else return visitor.VisitChildren(this);
-		}
 	}
 
 	[RuleVersion(0)]
@@ -438,19 +386,6 @@ public partial class NCalc2Parser : Parser {
 		{
 		}
 		public override int RuleIndex { get { return RULE_bitOrExpr; } }
-		public override void EnterRule(IParseTreeListener listener) {
-			INCalc2Listener typedListener = listener as INCalc2Listener;
-			if (typedListener != null) typedListener.EnterBitOrExpr(this);
-		}
-		public override void ExitRule(IParseTreeListener listener) {
-			INCalc2Listener typedListener = listener as INCalc2Listener;
-			if (typedListener != null) typedListener.ExitBitOrExpr(this);
-		}
-		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			INCalc2Visitor<TResult> typedVisitor = visitor as INCalc2Visitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitBitOrExpr(this);
-			else return visitor.VisitChildren(this);
-		}
 	}
 
 	[RuleVersion(0)]
@@ -526,19 +461,6 @@ public partial class NCalc2Parser : Parser {
 		{
 		}
 		public override int RuleIndex { get { return RULE_bitXorExpr; } }
-		public override void EnterRule(IParseTreeListener listener) {
-			INCalc2Listener typedListener = listener as INCalc2Listener;
-			if (typedListener != null) typedListener.EnterBitXorExpr(this);
-		}
-		public override void ExitRule(IParseTreeListener listener) {
-			INCalc2Listener typedListener = listener as INCalc2Listener;
-			if (typedListener != null) typedListener.ExitBitXorExpr(this);
-		}
-		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			INCalc2Visitor<TResult> typedVisitor = visitor as INCalc2Visitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitBitXorExpr(this);
-			else return visitor.VisitChildren(this);
-		}
 	}
 
 	[RuleVersion(0)]
@@ -614,19 +536,6 @@ public partial class NCalc2Parser : Parser {
 		{
 		}
 		public override int RuleIndex { get { return RULE_bitAndExpr; } }
-		public override void EnterRule(IParseTreeListener listener) {
-			INCalc2Listener typedListener = listener as INCalc2Listener;
-			if (typedListener != null) typedListener.EnterBitAndExpr(this);
-		}
-		public override void ExitRule(IParseTreeListener listener) {
-			INCalc2Listener typedListener = listener as INCalc2Listener;
-			if (typedListener != null) typedListener.ExitBitAndExpr(this);
-		}
-		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			INCalc2Visitor<TResult> typedVisitor = visitor as INCalc2Visitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitBitAndExpr(this);
-			else return visitor.VisitChildren(this);
-		}
 	}
 
 	[RuleVersion(0)]
@@ -702,19 +611,6 @@ public partial class NCalc2Parser : Parser {
 		{
 		}
 		public override int RuleIndex { get { return RULE_eqExpr; } }
-		public override void EnterRule(IParseTreeListener listener) {
-			INCalc2Listener typedListener = listener as INCalc2Listener;
-			if (typedListener != null) typedListener.EnterEqExpr(this);
-		}
-		public override void ExitRule(IParseTreeListener listener) {
-			INCalc2Listener typedListener = listener as INCalc2Listener;
-			if (typedListener != null) typedListener.ExitEqExpr(this);
-		}
-		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			INCalc2Visitor<TResult> typedVisitor = visitor as INCalc2Visitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitEqExpr(this);
-			else return visitor.VisitChildren(this);
-		}
 	}
 
 	[RuleVersion(0)]
@@ -819,19 +715,6 @@ public partial class NCalc2Parser : Parser {
 		{
 		}
 		public override int RuleIndex { get { return RULE_relExpr; } }
-		public override void EnterRule(IParseTreeListener listener) {
-			INCalc2Listener typedListener = listener as INCalc2Listener;
-			if (typedListener != null) typedListener.EnterRelExpr(this);
-		}
-		public override void ExitRule(IParseTreeListener listener) {
-			INCalc2Listener typedListener = listener as INCalc2Listener;
-			if (typedListener != null) typedListener.ExitRelExpr(this);
-		}
-		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			INCalc2Visitor<TResult> typedVisitor = visitor as INCalc2Visitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitRelExpr(this);
-			else return visitor.VisitChildren(this);
-		}
 	}
 
 	[RuleVersion(0)]
@@ -951,19 +834,6 @@ public partial class NCalc2Parser : Parser {
 		{
 		}
 		public override int RuleIndex { get { return RULE_shiftExpr; } }
-		public override void EnterRule(IParseTreeListener listener) {
-			INCalc2Listener typedListener = listener as INCalc2Listener;
-			if (typedListener != null) typedListener.EnterShiftExpr(this);
-		}
-		public override void ExitRule(IParseTreeListener listener) {
-			INCalc2Listener typedListener = listener as INCalc2Listener;
-			if (typedListener != null) typedListener.ExitShiftExpr(this);
-		}
-		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			INCalc2Visitor<TResult> typedVisitor = visitor as INCalc2Visitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitShiftExpr(this);
-			else return visitor.VisitChildren(this);
-		}
 	}
 
 	[RuleVersion(0)]
@@ -1057,19 +927,6 @@ public partial class NCalc2Parser : Parser {
 		{
 		}
 		public override int RuleIndex { get { return RULE_addExpr; } }
-		public override void EnterRule(IParseTreeListener listener) {
-			INCalc2Listener typedListener = listener as INCalc2Listener;
-			if (typedListener != null) typedListener.EnterAddExpr(this);
-		}
-		public override void ExitRule(IParseTreeListener listener) {
-			INCalc2Listener typedListener = listener as INCalc2Listener;
-			if (typedListener != null) typedListener.ExitAddExpr(this);
-		}
-		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			INCalc2Visitor<TResult> typedVisitor = visitor as INCalc2Visitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitAddExpr(this);
-			else return visitor.VisitChildren(this);
-		}
 	}
 
 	[RuleVersion(0)]
@@ -1163,19 +1020,6 @@ public partial class NCalc2Parser : Parser {
 		{
 		}
 		public override int RuleIndex { get { return RULE_multExpr; } }
-		public override void EnterRule(IParseTreeListener listener) {
-			INCalc2Listener typedListener = listener as INCalc2Listener;
-			if (typedListener != null) typedListener.EnterMultExpr(this);
-		}
-		public override void ExitRule(IParseTreeListener listener) {
-			INCalc2Listener typedListener = listener as INCalc2Listener;
-			if (typedListener != null) typedListener.ExitMultExpr(this);
-		}
-		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			INCalc2Visitor<TResult> typedVisitor = visitor as INCalc2Visitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitMultExpr(this);
-			else return visitor.VisitChildren(this);
-		}
 	}
 
 	[RuleVersion(0)]
@@ -1278,19 +1122,6 @@ public partial class NCalc2Parser : Parser {
 		{
 		}
 		public override int RuleIndex { get { return RULE_unaryExpr; } }
-		public override void EnterRule(IParseTreeListener listener) {
-			INCalc2Listener typedListener = listener as INCalc2Listener;
-			if (typedListener != null) typedListener.EnterUnaryExpr(this);
-		}
-		public override void ExitRule(IParseTreeListener listener) {
-			INCalc2Listener typedListener = listener as INCalc2Listener;
-			if (typedListener != null) typedListener.ExitUnaryExpr(this);
-		}
-		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			INCalc2Visitor<TResult> typedVisitor = visitor as INCalc2Visitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitUnaryExpr(this);
-			else return visitor.VisitChildren(this);
-		}
 	}
 
 	[RuleVersion(0)]
@@ -1383,19 +1214,6 @@ public partial class NCalc2Parser : Parser {
 		{
 		}
 		public override int RuleIndex { get { return RULE_primaryExpr; } }
-		public override void EnterRule(IParseTreeListener listener) {
-			INCalc2Listener typedListener = listener as INCalc2Listener;
-			if (typedListener != null) typedListener.EnterPrimaryExpr(this);
-		}
-		public override void ExitRule(IParseTreeListener listener) {
-			INCalc2Listener typedListener = listener as INCalc2Listener;
-			if (typedListener != null) typedListener.ExitPrimaryExpr(this);
-		}
-		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			INCalc2Visitor<TResult> typedVisitor = visitor as INCalc2Visitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitPrimaryExpr(this);
-			else return visitor.VisitChildren(this);
-		}
 	}
 
 	[RuleVersion(0)]
@@ -1489,19 +1307,6 @@ public partial class NCalc2Parser : Parser {
 		{
 		}
 		public override int RuleIndex { get { return RULE_value; } }
-		public override void EnterRule(IParseTreeListener listener) {
-			INCalc2Listener typedListener = listener as INCalc2Listener;
-			if (typedListener != null) typedListener.EnterValue(this);
-		}
-		public override void ExitRule(IParseTreeListener listener) {
-			INCalc2Listener typedListener = listener as INCalc2Listener;
-			if (typedListener != null) typedListener.ExitValue(this);
-		}
-		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			INCalc2Visitor<TResult> typedVisitor = visitor as INCalc2Visitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitValue(this);
-			else return visitor.VisitChildren(this);
-		}
 	}
 
 	[RuleVersion(0)]
@@ -1579,19 +1384,6 @@ public partial class NCalc2Parser : Parser {
 		{
 		}
 		public override int RuleIndex { get { return RULE_id; } }
-		public override void EnterRule(IParseTreeListener listener) {
-			INCalc2Listener typedListener = listener as INCalc2Listener;
-			if (typedListener != null) typedListener.EnterId(this);
-		}
-		public override void ExitRule(IParseTreeListener listener) {
-			INCalc2Listener typedListener = listener as INCalc2Listener;
-			if (typedListener != null) typedListener.ExitId(this);
-		}
-		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			INCalc2Visitor<TResult> typedVisitor = visitor as INCalc2Visitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitId(this);
-			else return visitor.VisitChildren(this);
-		}
 	}
 
 	[RuleVersion(0)]
