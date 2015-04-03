@@ -1,14 +1,10 @@
 # [NCalc2](http://pitermarx.github.io/NCalc2/)
-An attempt to bring NCalc to github
-
-http://ncalc.codeplex.com/
+An attempt to bring [NCalc](http://ncalc.codeplex.com/) to github
 
 Changes:
 - Used latest source in codeplex in 26/03/2015
 - Updated to ANTLR4.
 - Cosmetic Changes
-- Included gramar in project
-- added appveyor build
 - published to Nuget
 
 [![Coveralls Status](https://coveralls.io/repos/pitermarx/NCalc2/badge.svg?branch=master)](https://coveralls.io/r/pitermarx/NCalc2)
