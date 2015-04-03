@@ -66,6 +66,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Grammar\NCalc2BaseListener.cs" />
+    <Compile Include="Grammar\NCalc2BaseVisitor.cs" />
+    <Compile Include="Grammar\NCalc2Lexer.cs" />
+    <Compile Include="Grammar\NCalc2Listener.cs" />
+    <Compile Include="Grammar\NCalc2Parser.cs" />
+    <Compile Include="Grammar\NCalc2Visitor.cs" />
     <Compile Include="Visitors\SerializationVisitor.cs" />
     <Compile Include="Expressions\TernaryExpression.cs" />
     <Compile Include="ErrorListener.cs" />
@@ -104,10 +110,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Antlr4 Include="NCalc2.g4">
-      <Generator>MSBuild:Compile</Generator>
-      <CustomToolNamespace>NCalc2.Grammar</CustomToolNamespace>
-    </Antlr4>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
