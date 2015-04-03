@@ -8,6 +8,7 @@ using System.Text;
 using System.Globalization;
 using System.Collections.Generic;
 using NCalc2.Expressions;
+using ValueType = NCalc2.Expressions.ValueType;
 }
 
 @members {
@@ -140,12 +141,12 @@ primaryExpr returns[LogicalExpression retValue]
     ;
 
 value returns[LogicalExpression retValue]
-    : INTEGER     { try{ $retValue = new ValueExpression(int.Parse($INTEGER.text));} catch { $retValue = new ValueExpression(long.Parse($INTEGER.text)); } }
-    | FLOAT       { $retValue = new ValueExpression(double.Parse($FLOAT.text, NumberStyles.Float, numberFormatInfo));}
-    | STRING      { $retValue = new ValueExpression(extractString($STRING.text));}
-    | DATETIME    { $retValue = new ValueExpression(DateTime.Parse($DATETIME.text.Substring(1, $DATETIME.text.Length - 2)));}
-    | TRUE        { $retValue = new ValueExpression(true);}
-    | FALSE       { $retValue = new ValueExpression(false);}
+    : INTEGER     { try{ $retValue = new ValueExpression(int.Parse($INTEGER.text), ValueType.Integer);} catch { $retValue = new ValueExpression(long.Parse($INTEGER.text), ValueType.Integer); } }
+    | FLOAT       { $retValue = new ValueExpression(double.Parse($FLOAT.text, NumberStyles.Float, numberFormatInfo), ValueType.Float);}
+    | STRING      { $retValue = new ValueExpression(extractString($STRING.text), ValueType.String);}
+    | DATETIME    { $retValue = new ValueExpression(DateTime.Parse($DATETIME.text.Substring(1, $DATETIME.text.Length - 2)), ValueType.DateTime);}
+    | TRUE        { $retValue = new ValueExpression(true, ValueType.Boolean);}
+    | FALSE       { $retValue = new ValueExpression(false, ValueType.Boolean);}
     ;
 
 id returns[LogicalExpression retValue]

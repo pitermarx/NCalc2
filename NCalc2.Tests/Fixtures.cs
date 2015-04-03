@@ -46,6 +46,7 @@ namespace NCalc2.Tests
             Assert.Throws<ArgumentException>(() => new Expression("in(2)").Evaluate());
             Assert.Throws<ArgumentException>(() => new Expression("notFound(2)").Evaluate());
             Assert.Throws<ArgumentException>(() => new Expression("Sin([a])").Evaluate());
+            Assert.Throws<ArgumentException>(() => new ValueExpression(new object()));
         }
 
         [Test]
