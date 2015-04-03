@@ -6,7 +6,7 @@ $nunit = if ($isAppVeyor) { "nunit-console" } else { "packages\NUnit.Runners.2.6
 Write-Host "----------------------"
 Write-Host "   Running Coverage   "
 Write-Host "----------------------"
-& .\packages\OpenCover.4.5.3522\OpenCover.Console.exe -register:user -returntargetcode `
+& .\packages\OpenCover.4.5.3723\OpenCover.Console.exe -register:user -returntargetcode `
 "-filter:+[NCalc2]* -[NCalc2]*.Grammar.* -[NCalc2.Tests]*" `
 "-target:.\scripts\nunit.bat" "-targetargs: $nunit $config"
 
