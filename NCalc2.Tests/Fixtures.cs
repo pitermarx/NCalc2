@@ -39,6 +39,7 @@ namespace NCalc2.Tests
             Assert.Throws<ArgumentException>(() => new Expression("Sin(1,2)").Evaluate());
             Assert.Throws<ArgumentException>(() => new Expression("Sqrt(1,2)").Evaluate());
             Assert.Throws<ArgumentException>(() => new Expression("Truncate(1,2)").Evaluate());
+            Assert.Throws<ArgumentException>(() => new Expression("Tan(1,2)").Evaluate());
             Assert.Throws<ArgumentException>(() => new Expression("if(1,2)").Evaluate());
             Assert.Throws<ArgumentException>(() => new Expression("Max(1)").Evaluate());
             Assert.Throws<ArgumentException>(() => new Expression("max(1)").Evaluate());
@@ -65,8 +66,15 @@ namespace NCalc2.Tests
         [Test]
         public void ExpressionShouldEvaluate()
         {
+            Expression.CacheEnabled = false;
             var expressions = new[]
             {
+                "true ? 1 : 2",
+                "1 & 2",
+                "1 | 0",
+                "1 >> 1",
+                "1 << 2",
+                "~80",
                 "Abs(-1) + Cos(2)",
                 "2 + 3 + 5",
                 "2 * 3 + 5",
@@ -84,6 +92,7 @@ namespace NCalc2.Tests
                 Console.WriteLine("{0} = {1}",
                     expression,
                     new Expression(expression).Evaluate());
+            Expression.CacheEnabled = true;
         }
 
         [Test]
