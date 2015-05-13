@@ -17,3 +17,6 @@ Changes:
 AppVeyor (Windows) | Travis (Linux/Mono)
 ------------- | -------------
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/s9d2sqd3il4r6g63/branch/master?svg=true)](https://ci.appveyor.com/project/pitermarx/ncalc2/branch/master) | [![Travis Build Status](https://travis-ci.org/pitermarx/NCalc2.svg)](https://travis-ci.org/pitermarx/NCalc2)
+
+## Browse the code
+Start with [Expression](http://sourcebrowser.io/Browse/pitermarx/NCalc2/NCalc2/Expression.cs) here
