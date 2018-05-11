@@ -1,10 +1,12 @@
-
 image: Visual Studio 2017
 
 environment:
   COVERALLS_TOKEN:
     secure: B3EbXrtduvUHnLiH1yRBSXzpNUCSdraQo+OD4UdpF/SJKd3qFgWa7Q13/7+ukEBi
 
+  nuget_api_token:
+    secure: 0z9yOFGpfQzF7ZsJqzyLj8ckqPIv5FZ7+2TjiCUVR31ewZ7Ah2reiZ9WMubFXwAb
+    
 build_script:
   - ps: .\build.ps1
 
