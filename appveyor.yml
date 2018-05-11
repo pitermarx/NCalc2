@@ -1,6 +1,5 @@
-branches:
-  only:
-    - master
+
+image: Visual Studio 2017
 
 environment:
   COVERALLS_TOKEN:
