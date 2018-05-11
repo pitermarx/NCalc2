@@ -61,10 +61,6 @@ Task("Test")
             RepoToken = EnvironmentVariable("COVERALLS_TOKEN")
         });
     }
-    // if (AppVeyor.IsRunningOnAppVeyor)
-    // {
-    //     AppVeyor.UploadTestResults("./TestResult.xml", AppVeyorTestResultsType.NUnit3);
-    // }
 });
 
 Task("Publish")
