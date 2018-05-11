@@ -13,6 +13,7 @@ Task("CleanRestore")
 {
     CleanDirectories("./**/bin");
     CleanDirectories("./**/obj");
+    CleanDirectories("./**/TestResults");
     NuGetRestore("src/NCalc2.sln");
 });
 
@@ -41,21 +42,18 @@ Task("Test")
     OpenCover(
         tool => tool.DotNetCoreTest(project.ToString(), new DotNetCoreTestSettings
         {
-            Framework = "netcoreapp2.0",
+            Framework = "net46",
             NoBuild = true,
             NoRestore = true,
-            Configuration = configuration
+            Configuration = configuration,
+            ArgumentCustomization = a => a.Append("--logger:nunit;LogFilePath=../../TestResult.xml")
         }),
         "coverage.xml",
-        new OpenCoverSettings {
-            ReturnTargetCodeOffset = 0,
-            OldStyle = true,
-            Register = "Path64"
-        }
-        .WithFilter("-[*.Tests]*"));
+        new OpenCoverSettings().WithFilter("+[NCalc2]* -[*.Tests]*"));
     
     if (AppVeyor.IsRunningOnAppVeyor)
     {
+        AppVeyor.UploadTestResults("TestResult.xml", AppVeyorTestResultsType.NUnit3); 
         CoverallsIo("coverage.xml", new CoverallsIoSettings
         {
             RepoToken = EnvironmentVariable("COVERALLS_TOKEN")

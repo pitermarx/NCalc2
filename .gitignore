@@ -185,3 +185,4 @@ FakesAssemblies/
 .vs
 tools/*
 !tools/packages.config
+coverage.xml
