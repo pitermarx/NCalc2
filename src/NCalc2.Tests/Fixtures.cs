@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -656,13 +656,13 @@ namespace NCalc2.Tests
             Assert.AreEqual(false, new Expression("(0=1500000)||(((0+2200000000)-1500000)<0)").Evaluate());
         }
 
-        [Test, ExpectedException(typeof(InvalidOperationException))]
+        [Test]
         public void ShouldDisplayErrorIfUncompatibleTypes()
         {
             var e = new Expression("(a > b) + 10");
             e.Parameters["a"] = 1;
             e.Parameters["b"] = 2;
-            e.Evaluate();
+            Assert.Throws<InvalidOperationException>(() => e.Evaluate());
         }
 
         [Test]

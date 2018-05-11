@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageId>NCalc2</PackageId>
+    <Title>NCalc2</Title>
+    <Summary>NCalc clone brought to netstandard 2.0</Summary>
+    <Description>NCalc is a mathematical expressions evaluator in .NET. NCalc can parse any expression and evaluate the result, including static or dynamic parameters and custom functions.</Description>
+    <PackageTags>mathematical expression parse evaluate</PackageTags>
+    <Authors>sebastienros, pitermarx</Authors>
+    <Owners>pitermarx</Owners>
+    <PackageProjectUrl>https://github.com/pitermarx/NCalc2</PackageProjectUrl>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageLicenseUrl>http://ncalc.codeplex.com/license</PackageLicenseUrl>
+    <Copyright>Sebastien Ros</Copyright>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Antlr4" Version="4.6.4" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.4.1" />
+    <PackageReference Include="System.Dynamic.Runtime" Version="4.3.0" />
+  </ItemGroup>
+
+</Project>
