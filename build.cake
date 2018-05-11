@@ -49,7 +49,8 @@ Task("Test")
         "coverage.xml",
         new OpenCoverSettings {
             ReturnTargetCodeOffset = 0,
-            OldStyle = true
+            OldStyle = true,
+            Register = "Path64"
         }
         .WithFilter("-[*.Tests]*"));
     
