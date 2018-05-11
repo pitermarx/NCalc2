@@ -2,8 +2,6 @@
 An attempt to bring NCalc to 2018
 For an older/stable version see [NCalc-Edge](https://github.com/pitermarx/NCalc-Edge)
 
-http://ncalc.codeplex.com/
-
 Changes:
 - Used latest source in codeplex in 26/03/2015
 - Updated to ANTLR4.
